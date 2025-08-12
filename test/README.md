@@ -8,6 +8,6 @@ This folder contains the various test runners for SDLC_core. Please refer to the
 ```
 
 * `unit`: our suite of unit tests ([README](unit/README.md))
-* `integration`: our suite of API tests ([README](integration/browser/README.md))
+* `integration`: our suite of API tests ([README](integration/README.md))
 * `smoke`: our suite of automated UI tests ([README](smoke/README.md))
 * `e2e`: our suite of e2e tests ([README](e2e/README.md))

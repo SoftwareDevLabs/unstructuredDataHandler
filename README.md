@@ -1,6 +1,6 @@
 
 
-# Welcome to the SDLC_core Repo for SoftwareDevLab SDLC_core Repo
+# Welcome to the SDLC_core Repo
 
 <details>
   <summary><strong>Table of Contents</strong></summary>
@@ -46,7 +46,7 @@ Related repositories include:
 
 ## SDLC_core Roadmap
 
-The plan for the SDLC_core [is described here](/doc/roadmap-2023.md) and
+The plan for the SDLC_core [is described here](./doc/roadmap-20xx.md) and
 will be updated as the project proceeds.
 
 ## SDLC_core Overview
