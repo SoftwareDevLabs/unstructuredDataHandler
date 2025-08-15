@@ -99,8 +99,17 @@ Documentation](https://github.com/SoftwareDevLabs).
 📁 notebooks/ → Quick experiments and prototyping
 📁 tests/ → Unit, integration, and end-to-end tests
 📁 src/ → The core engine — all logic lives here (./src/README.md)
+  └── frontend/ → Web-based GUI for LLM backend configuration
 
 ```
+
+### Frontend GUI Features
+
+The new frontend provides a web-based interface for:
+- **Backend Selection**: Choose between OpenAI, Anthropic, and other LLM providers
+- **Configuration Management**: Set API keys, models, and provider-specific settings
+- **Real-time Switching**: Switch between backends with live updates
+- **Settings Persistence**: All configurations are saved and persist across sessions
 ---
 
 ## ⚡ Best Practices
@@ -120,10 +129,18 @@ Documentation](https://github.com/SoftwareDevLabs).
 ## 🧭 Getting Started
 
 1. Clone the repo  
-2. Install via `requirements.txt`  
-3. Set up model configs  
-4. Check sample code  
-5. Begin in notebooks  
+2. Install via `requirements.txt`:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Launch the frontend interface:
+   ```bash
+   python run_frontend.py
+   ```
+4. Access the web interface at `http://localhost:5000`
+5. Configure your LLM backends in the Settings page
+6. Check sample code in the `examples/` directory
+7. Begin experimenting in notebooks  
 
 ---
 

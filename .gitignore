@@ -278,6 +278,11 @@ MSG*.bin
 
 # python
 *.pyc
+__pycache__/
+*.pytest_cache/
+
+# Frontend configuration files (contain API keys)
+src/frontend/config/settings.json
 
 **/Generated Files/
 **/Merged/*
