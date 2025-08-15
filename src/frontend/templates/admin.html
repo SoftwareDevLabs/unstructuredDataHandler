@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Panel - SDLC Core{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2><i class="bi bi-gear"></i> Admin Panel</h2>
+        <p class="text-muted">Manage users and roles in the system.</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="bi bi-people"></i> Users Management</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Roles</th>
+                                <th>Created</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                            <tr>
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>
+                                    {% if user.is_active %}
+                                        <span class="badge bg-success">Active</span>
+                                    {% else %}
+                                        <span class="badge bg-danger">Inactive</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% for role in user.get_roles() %}
+                                        <span class="badge bg-primary me-1">{{ role }}</span>
+                                    {% endfor %}
+                                </td>
+                                <td>{{ user.created_at.strftime('%m/%d/%Y') }}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary" onclick="editUser({{ user.id }})">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="bi bi-shield-check"></i> Roles</h5>
+            </div>
+            <div class="card-body">
+                {% for role in roles %}
+                <div class="mb-3 p-2 border rounded">
+                    <h6 class="mb-1">{{ role.name }}</h6>
+                    <small class="text-muted">{{ role.description }}</small>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5><i class="bi bi-graph-up"></i> System Stats</h5>
+            </div>
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-6">
+                        <h4 class="text-primary">{{ users|length }}</h4>
+                        <small class="text-muted">Total Users</small>
+                    </div>
+                    <div class="col-6">
+                        <h4 class="text-success">{{ roles|length }}</h4>
+                        <small class="text-muted">Total Roles</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5><i class="bi bi-tools"></i> Admin Tools</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <button class="btn btn-outline-primary" onclick="loadUsers()">
+                        <i class="bi bi-arrow-clockwise"></i> Refresh Users
+                    </button>
+                    <button class="btn btn-outline-info" onclick="loadRoles()">
+                        <i class="bi bi-list"></i> View Roles API
+                    </button>
+                    <button class="btn btn-outline-warning" onclick="exportData()">
+                        <i class="bi bi-download"></i> Export Data
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function editUser(userId) {
+    alert('Edit user ' + userId + ' - Feature coming soon!');
+}
+
+function loadUsers() {
+    fetch('/api/admin/users')
+        .then(response => response.json())
+        .then(data => {
+            console.log('Users data:', data);
+            alert('Users data loaded! Check console for details.');
+        })
+        .catch(error => {
+            console.error('Error loading users:', error);
+            alert('Error loading users');
+        });
+}
+
+function loadRoles() {
+    fetch('/api/admin/roles')
+        .then(response => response.json())
+        .then(data => {
+            console.log('Roles data:', data);
+            alert('Roles data loaded! Check console for details.');
+        })
+        .catch(error => {
+            console.error('Error loading roles:', error);
+            alert('Error loading roles');
+        });
+}
+
+function exportData() {
+    alert('Export functionality - Feature coming soon!');
+}
+</script>
+{% endblock %}

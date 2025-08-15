@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - SDLC Core{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2><i class="bi bi-speedometer2"></i> Dashboard</h2>
+        <p class="text-muted">Welcome to your personal dashboard, {{ user.username }}!</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="bi bi-person-circle"></i> Profile Information</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-borderless">
+                    <tr>
+                        <th width="30%">Username:</th>
+                        <td>{{ user.username }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email:</th>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>Account Status:</th>
+                        <td>
+                            {% if user.is_active %}
+                                <span class="badge bg-success">Active</span>
+                            {% else %}
+                                <span class="badge bg-danger">Inactive</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Member Since:</th>
+                        <td>{{ user.created_at.strftime('%B %d, %Y') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Last Login:</th>
+                        <td>
+                            {% if user.last_login %}
+                                {{ user.last_login.strftime('%B %d, %Y at %I:%M %p') }}
+                            {% else %}
+                                Never
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Roles:</th>
+                        <td>
+                            {% for role in user.get_roles() %}
+                                <span class="badge bg-primary me-1">{{ role }}</span>
+                            {% endfor %}
+                            {% if not user.get_roles() %}
+                                <span class="text-muted">No roles assigned</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="bi bi-list-check"></i> Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    {% if user.has_role('admin') %}
+                    <a href="{{ url_for('main.admin') }}" class="btn btn-outline-primary">
+                        <i class="bi bi-gear"></i> Admin Panel
+                    </a>
+                    {% endif %}
+                    
+                    <button class="btn btn-outline-secondary" onclick="loadProfile()">
+                        <i class="bi bi-arrow-clockwise"></i> Refresh Profile
+                    </button>
+                    
+                    <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-danger">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5><i class="bi bi-info-circle"></i> System Info</h5>
+            </div>
+            <div class="card-body">
+                <small class="text-muted">
+                    SDLC Core Frontend Infrastructure<br>
+                    Role-based Authentication System
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function loadProfile() {
+    fetch('/auth/api/user/profile')
+        .then(response => response.json())
+        .then(data => {
+            if (data.user) {
+                alert('Profile loaded successfully!');
+                // You can update the page content here
+            }
+        })
+        .catch(error => {
+            console.error('Error loading profile:', error);
+            alert('Error loading profile');
+        });
+}
+</script>
+{% endblock %}
