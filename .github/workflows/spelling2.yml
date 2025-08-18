@@ -141,6 +141,11 @@ jobs:
             cspell:python/python/python.txt
             cspell:mnemonics/mnemonics.txt
             cspell:powershell/powershell.txt
+      - name: Upload SARIF report
+        uses: actions/upload-artifact@v4
+        with:
+          name: check-spelling-sarif
+          path: check-spelling.sarif
 
   comment-push:
     name: Report (Push)

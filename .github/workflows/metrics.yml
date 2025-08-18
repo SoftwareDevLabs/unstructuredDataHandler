@@ -25,3 +25,8 @@ jobs:
           git add metrics.svg
           git commit -m "chore: update metrics [skip ci]" || echo "No changes to commit"
           git push
+      - name: Upload metrics SVG
+        uses: actions/upload-artifact@v4
+        with:
+          name: metrics-svg
+          path: metrics.svg
