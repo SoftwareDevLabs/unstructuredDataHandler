@@ -44,7 +44,11 @@ Please describe the tests that you ran to verify your changes. Provide instructi
 
 ## Validation Steps Performed
 
-## PR Checklist:
+## Frontend Location and Stack
+
+Frontend-related code is located in `/frontend/` at the repository root. It contains the Web interface and dashboard implemented with React, TypeScript, TailwindCSS and Socket.IO client for real-time features.
+
+## PR Checklist
 
 - [ ] My code follows the style guidelines of this project
 - [ ] I have performed a self-review of my own code

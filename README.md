@@ -64,6 +64,11 @@ code:
 
 ### Shared Components
 
+## Frontend
+
+Frontend-related code and documentation is kept under the `/frontend/` directory at the repository root. This includes the Web interface and dashboard. The frontend is implemented with React, TypeScript, TailwindCSS, and uses the Socket.IO client for real-time communication.
+
+
 
 
 ## Resources
