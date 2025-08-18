@@ -12,15 +12,6 @@ SDLC_core is a Python-based Software Development Life Cycle core project that pr
 
 ## Build and Validation Instructions
 
-### Frontend
-
-Frontend-related code and documentation is located in the `/frontend/` directory at the repository root. This contains the Web interface and dashboard source and docs. The frontend stack uses:
-- React
-- TypeScript
-- TailwindCSS
-- Socket.IO client for real-time communication
-
-
 ### Prerequisites
 
 **CRITICAL**: Always run dependency installation before any build or test operations:
