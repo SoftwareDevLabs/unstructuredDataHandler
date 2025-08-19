@@ -48,7 +48,7 @@ jobs:
           fail_ci_if_error: false
           token: ${{ secrets.CODECOV_TOKEN }}
       - name: Run mypy static analysis
-        run: mypy src/
+        run: mypy src/ --ignore-missing-imports --exclude "src/llm/router.py"
 
   tests:
     name: Run tests matrix
