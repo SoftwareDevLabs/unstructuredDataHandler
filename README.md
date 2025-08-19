@@ -186,7 +186,7 @@ Please file new issues, feature requests and suggestions, but **DO search for si
 
 If you would like to ask a question that you feel doesn't warrant an issue (yet), please reach out to us via Twitter:
 
-* contact [info@softwaredevlabs.com][conduct-email]
+ - contact [info@softwaredevlabs.com][conduct-email]
 
 ## Developer Guidance
 
@@ -213,9 +213,9 @@ Please review these brief docs below about our coding practices.
 This is a work in progress as we learn what we'll need to provide people in
 order to be effective contributors to our project.
 
-* [Coding Style](./doc/STYLE.md)
-* [Code Organization](./doc/ORGANIZATION.md)
-* [Exceptions in our legacy codebase](./doc/EXCEPTIONS.md)
+ - [Coding Style](./doc/STYLE.md)
+ - [Code Organization](./doc/ORGANIZATION.md)
+ - [Exceptions in our legacy codebase](./doc/EXCEPTIONS.md)
 
 ---
 
@@ -224,4 +224,7 @@ order to be effective contributors to our project.
 This project has adopted the [Code of Conduct][conduct-code]. For more information see the [Code of Conduct][conduct-code] or contact [info@softwaredevlabs.com][conduct-email] with any additional questions or comments.
 
 [conduct-code](./CODE_OF_CONDUCT.md)
+
+[conduct-email]: mailto:info@softwaredevlabs.com
+[conduct-code]: ./CODE_OF_CONDUCT.md
 [conduct-email]: mailto:info@softwaredevlabs.com

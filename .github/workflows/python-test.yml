@@ -46,6 +46,7 @@ jobs:
         with:
           files: ./coverage.xml
           fail_ci_if_error: false
+          token: ${{ secrets.CODECOV_TOKEN }}
       - name: Run mypy static analysis
         run: mypy src/
 
@@ -128,6 +129,13 @@ jobs:
           . .venv_ci/bin/activate
           pip install --upgrade pip setuptools wheel
           pip install langchain-google-genai langchain-community langchain-ollama python-dotenv
+      - name: Cache pip for provider-smoke
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-provider-smoke-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
       - name: Quick deepagent smoke (dry-run disabled)
         env:
           PYTHONPATH: .
@@ -143,6 +151,13 @@ jobs:
         provider: [gemini, openai, ollama]
     steps:
       - uses: actions/checkout@v4
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-providers-${{ matrix.provider }}-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
