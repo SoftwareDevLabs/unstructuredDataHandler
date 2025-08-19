@@ -6,4 +6,4 @@ Keeping it separate gives a clear name for future LLM-specific routing logic.
 """
 
 # Placeholder implementation — keep module importable for now.
-__all__ = []
+__all__: list[str] = []

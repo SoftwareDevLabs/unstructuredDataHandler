@@ -1,23 +1,26 @@
+"""LangChain agent integration using OpenAI LLM and standard tools."""
 
-"""
-LangChain agent integration using OpenAI LLM and standard tools.
-"""
+from typing import Any, Optional, List
 
 from langchain.agents import initialize_agent, AgentType
 
-# LLM imports for dynamic selection
+# LLM names declared as Any so mypy accepts fallback to None if imports fail
+GoogleGenerativeAI: Any
+OpenAI: Any
+Ollama: Any
+
 try:
-    from langchain_google_genai.llms import GoogleGenerativeAI
+    from langchain_google_genai.llms import GoogleGenerativeAI  # type: ignore
 except Exception:
     GoogleGenerativeAI = None
 
 try:
-    from langchain_community.llms import OpenAI
+    from langchain_community.llms import OpenAI  # type: ignore
 except Exception:
     OpenAI = None
 
 try:
-    from langchain_community.llms import Ollama
+    from langchain_community.llms import Ollama  # type: ignore
 except Exception:
     Ollama = None
 
@@ -43,12 +46,12 @@ class SDLCFlexibleAgent:
     def __init__(
         self,
         provider: str,
-        api_key: str = None,
-        model: str = None,
-        tools=None,
+        api_key: Optional[str] = None,
+        model: Optional[str] = None,
+        tools: Optional[List[Any]] = None,
         dry_run: bool = False,
         **kwargs,
-    ):
+    ) -> None:
         """
         provider: 'gemini', 'openai', 'ollama', etc.
         api_key: API key for the provider (if required)
@@ -58,6 +61,9 @@ class SDLCFlexibleAgent:
         """
         provider = provider.lower()
         self.dry_run = bool(dry_run)
+        # typed instance attributes for mypy
+        self.llm: Any = None
+        self.agent: Any = None
         # In dry-run mode, avoid creating real LLMs or network calls
         if self.dry_run:
             # Use a no-network mock LLM and a MockAgent below
@@ -86,6 +92,7 @@ class SDLCFlexibleAgent:
             self.tools = [EchoTool()]
         else:
             self.tools = tools
+        # initialize_agent returns an executor; keep as Any for flexibility in dry-run tests
         self.agent = initialize_agent(
             self.tools,
             self.llm,
