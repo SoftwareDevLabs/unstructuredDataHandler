@@ -3,7 +3,6 @@ name: Python Tests (consolidated)
 permissions:
   contents: read
 
-
 on:
   push:
     branches: [ main ]
@@ -56,6 +55,10 @@ jobs:
 
   tests:
     name: Run tests matrix
+
+    permissions:
+      contents: read
+
     runs-on: ubuntu-latest
     strategy:
       matrix:
