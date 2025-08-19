@@ -145,6 +145,29 @@ Documentation](https://github.com/SoftwareDevLabs).
 - `README.md` – Project overview and usage  
 - `Dockerfile` – Container build instructions  
 
+## Running tests
+
+We provide a small helper script that creates an isolated virtualenv and runs the test suite.
+
+Run the full test suite locally:
+
+```bash
+./scripts/run-tests.sh
+```
+
+Or run just the deepagent tests (fast):
+
+```bash
+./scripts/run-tests.sh test/unit -k deepagent
+```
+
+You can also use the Makefile targets:
+
+```bash
+make test
+make lint
+```
+
 ---
 
 ## Contributing
