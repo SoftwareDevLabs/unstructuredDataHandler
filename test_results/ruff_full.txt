@@ -1,0 +1,861 @@
+warning: `incorrect-blank-line-before-class` (D203) and `no-blank-line-before-class` (D211) are incompatible. Ignoring `incorrect-blank-line-before-class`.
+warning: `multi-line-summary-first-line` (D212) and `multi-line-summary-second-line` (D213) are incompatible. Ignoring `multi-line-summary-second-line`.
+INP001 File `src/agents/base_agent.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/agents/base_agent.py:1:1
+
+D100 Missing docstring in public module
+--> src/agents/base_agent.py:1:1
+
+INP001 File `src/agents/deepagent.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/agents/deepagent.py:1:1
+
+D200 One-line docstring should fit on one line
+ --> src/agents/deepagent.py:2:1
+  |
+2 | / """
+3 | | LangChain agent integration using OpenAI LLM and standard tools.
+4 | | """
+  | |___^
+5 |
+6 |   from langchain.agents import initialize_agent, AgentType
+  |
+help: Reformat to one line
+
+D212 [*] Multi-line docstring summary should start at the first line
+ --> src/agents/deepagent.py:2:1
+  |
+2 | / """
+3 | | LangChain agent integration using OpenAI LLM and standard tools.
+4 | | """
+  | |___^
+5 |
+6 |   from langchain.agents import initialize_agent, AgentType
+  |
+help: Remove whitespace after opening quotes
+
+I001 [*] Import block is un-sorted or un-formatted
+ --> src/agents/deepagent.py:6:1
+  |
+4 | """
+5 |
+6 | from langchain.agents import initialize_agent, AgentType
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+7 |
+8 | # LLM imports for dynamic selection
+  |
+help: Organize imports
+
+BLE001 Do not catch blind exception: `Exception`
+  --> src/agents/deepagent.py:11:8
+   |
+ 9 | try:
+10 |     from langchain_google_genai.llms import GoogleGenerativeAI
+11 | except Exception:
+   |        ^^^^^^^^^
+12 |     GoogleGenerativeAI = None
+   |
+
+BLE001 Do not catch blind exception: `Exception`
+  --> src/agents/deepagent.py:16:8
+   |
+14 | try:
+15 |     from langchain_community.llms import OpenAI
+16 | except Exception:
+   |        ^^^^^^^^^
+17 |     OpenAI = None
+   |
+
+BLE001 Do not catch blind exception: `Exception`
+  --> src/agents/deepagent.py:21:8
+   |
+19 | try:
+20 |     from langchain_community.llms import Ollama
+21 | except Exception:
+   |        ^^^^^^^^^
+22 |     Ollama = None
+   |
+
+D101 Missing docstring in public class
+  --> src/agents/deepagent.py:28:7
+   |
+28 | class EchoTool(BaseTool):
+   |       ^^^^^^^^
+29 |     name: str = "EchoTool"
+30 |     description: str = "Echoes the input back to the user."
+   |
+
+ANN202 Missing return type annotation for private function `_run`
+  --> src/agents/deepagent.py:32:9
+   |
+30 |     description: str = "Echoes the input back to the user."
+31 |
+32 |     def _run(self, query: str):
+   |         ^^^^
+33 |         return f"Echo: {query}"
+   |
+help: Add return type annotation: `str`
+
+ANN202 Missing return type annotation for private function `_arun`
+  --> src/agents/deepagent.py:35:15
+   |
+33 |         return f"Echo: {query}"
+34 |
+35 |     async def _arun(self, query: str):
+   |               ^^^^^
+36 |         return f"Echo: {query}"
+   |
+help: Add return type annotation: `str`
+
+D200 One-line docstring should fit on one line
+  --> src/agents/deepagent.py:40:5
+   |
+39 |   class SDLCFlexibleAgent:
+40 | /     """
+41 | |     SDLC Agent supporting multiple LLM providers (Gemini, OpenAI, Ollama, etc.).
+42 | |     """
+   | |_______^
+43 |       def __init__(self, provider: str, api_key: str = None, model: str = None, tools=None, dry_run: bool = False, **kwargs):
+44 |           """
+   |
+help: Reformat to one line
+
+D204 [*] 1 blank line required after class docstring
+  --> src/agents/deepagent.py:40:5
+   |
+39 |   class SDLCFlexibleAgent:
+40 | /     """
+41 | |     SDLC Agent supporting multiple LLM providers (Gemini, OpenAI, Ollama, etc.).
+42 | |     """
+   | |_______^
+43 |       def __init__(self, provider: str, api_key: str = None, model: str = None, tools=None, dry_run: bool = False, **kwargs):
+44 |           """
+   |
+help: Insert 1 blank line after class docstring
+
+D212 [*] Multi-line docstring summary should start at the first line
+  --> src/agents/deepagent.py:40:5
+   |
+39 |   class SDLCFlexibleAgent:
+40 | /     """
+41 | |     SDLC Agent supporting multiple LLM providers (Gemini, OpenAI, Ollama, etc.).
+42 | |     """
+   | |_______^
+43 |       def __init__(self, provider: str, api_key: str = None, model: str = None, tools=None, dry_run: bool = False, **kwargs):
+44 |           """
+   |
+help: Remove whitespace after opening quotes
+
+ANN204 Missing return type annotation for special method `__init__`
+  --> src/agents/deepagent.py:43:9
+   |
+41 |     SDLC Agent supporting multiple LLM providers (Gemini, OpenAI, Ollama, etc.).
+42 |     """
+43 |     def __init__(self, provider: str, api_key: str = None, model: str = None, tools=None, dry_run: bool = False, **kwargs):
+   |         ^^^^^^^^
+44 |         """
+45 |         provider: 'gemini', 'openai', 'ollama', etc.
+   |
+help: Add return type annotation: `None`
+
+RUF013 PEP 484 prohibits implicit `Optional`
+  --> src/agents/deepagent.py:43:48
+   |
+41 |     SDLC Agent supporting multiple LLM providers (Gemini, OpenAI, Ollama, etc.).
+42 |     """
+43 |     def __init__(self, provider: str, api_key: str = None, model: str = None, tools=None, dry_run: bool = False, **kwargs):
+   |                                                ^^^
+44 |         """
+45 |         provider: 'gemini', 'openai', 'ollama', etc.
+   |
+help: Convert to `Optional[T]`
+
+RUF013 PEP 484 prohibits implicit `Optional`
+  --> src/agents/deepagent.py:43:67
+   |
+41 |     SDLC Agent supporting multiple LLM providers (Gemini, OpenAI, Ollama, etc.).
+42 |     """
+43 |     def __init__(self, provider: str, api_key: str = None, model: str = None, tools=None, dry_run: bool = False, **kwargs):
+   |                                                                   ^^^
+44 |         """
+45 |         provider: 'gemini', 'openai', 'ollama', etc.
+   |
+help: Convert to `Optional[T]`
+
+ANN001 Missing type annotation for function argument `tools`
+  --> src/agents/deepagent.py:43:79
+   |
+41 |     SDLC Agent supporting multiple LLM providers (Gemini, OpenAI, Ollama, etc.).
+42 |     """
+43 |     def __init__(self, provider: str, api_key: str = None, model: str = None, tools=None, dry_run: bool = False, **kwargs):
+   |                                                                               ^^^^^
+44 |         """
+45 |         provider: 'gemini', 'openai', 'ollama', etc.
+   |
+
+E501 Line too long (123 > 88)
+  --> src/agents/deepagent.py:43:89
+   |
+41 |     SDLC Agent supporting multiple LLM providers (Gemini, OpenAI, Ollama, etc.).
+42 |     """
+43 |     def __init__(self, provider: str, api_key: str = None, model: str = None, tools=None, dry_run: bool = False, **kwargs):
+   |                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+44 |         """
+45 |         provider: 'gemini', 'openai', 'ollama', etc.
+   |
+
+FBT001 Boolean-typed positional argument in function definition
+  --> src/agents/deepagent.py:43:91
+   |
+41 |     SDLC Agent supporting multiple LLM providers (Gemini, OpenAI, Ollama, etc.).
+42 |     """
+43 |     def __init__(self, provider: str, api_key: str = None, model: str = None, tools=None, dry_run: bool = False, **kwargs):
+   |                                                                                           ^^^^^^^
+44 |         """
+45 |         provider: 'gemini', 'openai', 'ollama', etc.
+   |
+
+FBT002 Boolean default positional argument in function definition
+  --> src/agents/deepagent.py:43:91
+   |
+41 |     SDLC Agent supporting multiple LLM providers (Gemini, OpenAI, Ollama, etc.).
+42 |     """
+43 |     def __init__(self, provider: str, api_key: str = None, model: str = None, tools=None, dry_run: bool = False, **kwargs):
+   |                                                                                           ^^^^^^^
+44 |         """
+45 |         provider: 'gemini', 'openai', 'ollama', etc.
+   |
+
+ANN003 Missing type annotation for `**kwargs`
+  --> src/agents/deepagent.py:43:114
+   |
+41 |     SDLC Agent supporting multiple LLM providers (Gemini, OpenAI, Ollama, etc.).
+42 |     """
+43 |     def __init__(self, provider: str, api_key: str = None, model: str = None, tools=None, dry_run: bool = False, **kwargs):
+   |                                                                                                                  ^^^^^^^^
+44 |         """
+45 |         provider: 'gemini', 'openai', 'ollama', etc.
+   |
+
+D205 1 blank line required between summary line and description
+  --> src/agents/deepagent.py:44:9
+   |
+42 |       """
+43 |       def __init__(self, provider: str, api_key: str = None, model: str = None, tools=None, dry_run: bool = False, **kwargs):
+44 | /         """
+45 | |         provider: 'gemini', 'openai', 'ollama', etc.
+46 | |         api_key: API key for the provider (if required)
+47 | |         model: Model name (if required)
+48 | |         tools: Optional list of tools
+49 | |         kwargs: Additional LLM-specific arguments
+50 | |         """
+   | |___________^
+51 |           provider = provider.lower()
+52 |           self.dry_run = bool(dry_run)
+   |
+help: Insert single blank line
+
+D212 [*] Multi-line docstring summary should start at the first line
+  --> src/agents/deepagent.py:44:9
+   |
+42 |       """
+43 |       def __init__(self, provider: str, api_key: str = None, model: str = None, tools=None, dry_run: bool = False, **kwargs):
+44 | /         """
+45 | |         provider: 'gemini', 'openai', 'ollama', etc.
+46 | |         api_key: API key for the provider (if required)
+47 | |         model: Model name (if required)
+48 | |         tools: Optional list of tools
+49 | |         kwargs: Additional LLM-specific arguments
+50 | |         """
+   | |___________^
+51 |           provider = provider.lower()
+52 |           self.dry_run = bool(dry_run)
+   |
+help: Remove whitespace after opening quotes
+
+D400 First line should end with a period
+  --> src/agents/deepagent.py:44:9
+   |
+42 |       """
+43 |       def __init__(self, provider: str, api_key: str = None, model: str = None, tools=None, dry_run: bool = False, **kwargs):
+44 | /         """
+45 | |         provider: 'gemini', 'openai', 'ollama', etc.
+46 | |         api_key: API key for the provider (if required)
+47 | |         model: Model name (if required)
+48 | |         tools: Optional list of tools
+49 | |         kwargs: Additional LLM-specific arguments
+50 | |         """
+   | |___________^
+51 |           provider = provider.lower()
+52 |           self.dry_run = bool(dry_run)
+   |
+help: Add period
+
+D401 First line of docstring should be in imperative mood: "provider: 'gemini', 'openai', 'ollama', etc."
+  --> src/agents/deepagent.py:44:9
+   |
+42 |       """
+43 |       def __init__(self, provider: str, api_key: str = None, model: str = None, tools=None, dry_run: bool = False, **kwargs):
+44 | /         """
+45 | |         provider: 'gemini', 'openai', 'ollama', etc.
+46 | |         api_key: API key for the provider (if required)
+47 | |         model: Model name (if required)
+48 | |         tools: Optional list of tools
+49 | |         kwargs: Additional LLM-specific arguments
+50 | |         """
+   | |___________^
+51 |           provider = provider.lower()
+52 |           self.dry_run = bool(dry_run)
+   |
+
+D415 First line should end with a period, question mark, or exclamation point
+  --> src/agents/deepagent.py:44:9
+   |
+42 |       """
+43 |       def __init__(self, provider: str, api_key: str = None, model: str = None, tools=None, dry_run: bool = False, **kwargs):
+44 | /         """
+45 | |         provider: 'gemini', 'openai', 'ollama', etc.
+46 | |         api_key: API key for the provider (if required)
+47 | |         model: Model name (if required)
+48 | |         tools: Optional list of tools
+49 | |         kwargs: Additional LLM-specific arguments
+50 | |         """
+   | |___________^
+51 |           provider = provider.lower()
+52 |           self.dry_run = bool(dry_run)
+   |
+help: Add closing punctuation
+
+PLR1714 Consider merging multiple comparisons: `provider in {"gemini", "google"}`.
+  --> src/agents/deepagent.py:63:12
+   |
+61 |             self.agent = MockAgent()
+62 |             return
+63 |         if provider == "gemini" or provider == "google":
+   |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+64 |             # Use GoogleGenerativeAI from langchain-google-genai
+65 |             gemini_model = model or "chat-bison-001"
+   |
+help: Merge multiple comparisons
+
+E501 Line too long (95 > 88)
+  --> src/agents/deepagent.py:66:89
+   |
+64 |             # Use GoogleGenerativeAI from langchain-google-genai
+65 |             gemini_model = model or "chat-bison-001"
+66 |             self.llm = GoogleGenerativeAI(google_api_key=api_key, model=gemini_model, **kwargs)
+   |                                                                                         ^^^^^^^
+67 |         elif provider == "openai":
+68 |             self.llm = OpenAI(openai_api_key=api_key, model=model or "gpt-3.5-turbo", **kwargs)
+   |
+
+E501 Line too long (95 > 88)
+  --> src/agents/deepagent.py:68:89
+   |
+66 |             self.llm = GoogleGenerativeAI(google_api_key=api_key, model=gemini_model, **kwargs)
+67 |         elif provider == "openai":
+68 |             self.llm = OpenAI(openai_api_key=api_key, model=model or "gpt-3.5-turbo", **kwargs)
+   |                                                                                         ^^^^^^^
+69 |         elif provider == "ollama" and Ollama is not None:
+70 |             self.llm = Ollama(model=model or "llama2", **kwargs)
+   |
+
+TRY003 Avoid specifying long messages outside the exception class
+  --> src/agents/deepagent.py:72:19
+   |
+70 |             self.llm = Ollama(model=model or "llama2", **kwargs)
+71 |         else:
+72 |             raise ValueError(f"Unsupported or unavailable provider: {provider}")
+   |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+73 |         if tools is None:
+74 |             self.tools = [EchoTool()]
+   |
+
+EM102 Exception must not use an f-string literal, assign to variable first
+  --> src/agents/deepagent.py:72:30
+   |
+70 |             self.llm = Ollama(model=model or "llama2", **kwargs)
+71 |         else:
+72 |             raise ValueError(f"Unsupported or unavailable provider: {provider}")
+   |                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+73 |         if tools is None:
+74 |             self.tools = [EchoTool()]
+   |
+help: Assign to variable; remove f-string literal
+
+E501 Line too long (130 > 88)
+  --> src/agents/deepagent.py:77:89
+   |
+75 |         else:
+76 |             self.tools = tools
+77 |         self.agent = initialize_agent(self.tools, self.llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, verbose=not self.dry_run)
+   |                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+78 |
+79 |     def run(self, input_data: str):
+   |
+
+ANN201 Missing return type annotation for public function `run`
+  --> src/agents/deepagent.py:79:9
+   |
+77 |         self.agent = initialize_agent(self.tools, self.llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, verbose=not self.dry_run)
+78 |
+79 |     def run(self, input_data: str):
+   |         ^^^
+80 |         """
+81 |         Run the agent on the provided input data (prompt).
+   |
+help: Add return type annotation
+
+D200 One-line docstring should fit on one line
+  --> src/agents/deepagent.py:80:9
+   |
+79 |       def run(self, input_data: str):
+80 | /         """
+81 | |         Run the agent on the provided input data (prompt).
+82 | |         """
+   | |___________^
+83 |           # If dry-run, MockAgent implements run; otherwise call the agent
+84 |           return self.agent.run(input_data)
+   |
+help: Reformat to one line
+
+D212 [*] Multi-line docstring summary should start at the first line
+  --> src/agents/deepagent.py:80:9
+   |
+79 |       def run(self, input_data: str):
+80 | /         """
+81 | |         Run the agent on the provided input data (prompt).
+82 | |         """
+   | |___________^
+83 |           # If dry-run, MockAgent implements run; otherwise call the agent
+84 |           return self.agent.run(input_data)
+   |
+help: Remove whitespace after opening quotes
+
+D204 [*] 1 blank line required after class docstring
+  --> src/agents/deepagent.py:88:5
+   |
+87 | class MockAgent:
+88 |     """A trivial agent used for dry-run and CI that only echoes input."""
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+89 |     def __init__(self):
+90 |         self.last_input = None
+   |
+help: Insert 1 blank line after class docstring
+
+ANN204 Missing return type annotation for special method `__init__`
+  --> src/agents/deepagent.py:89:9
+   |
+87 | class MockAgent:
+88 |     """A trivial agent used for dry-run and CI that only echoes input."""
+89 |     def __init__(self):
+   |         ^^^^^^^^
+90 |         self.last_input = None
+   |
+help: Add return type annotation: `None`
+
+D107 Missing docstring in `__init__`
+  --> src/agents/deepagent.py:89:9
+   |
+87 | class MockAgent:
+88 |     """A trivial agent used for dry-run and CI that only echoes input."""
+89 |     def __init__(self):
+   |         ^^^^^^^^
+90 |         self.last_input = None
+   |
+
+ANN201 Missing return type annotation for public function `run`
+  --> src/agents/deepagent.py:92:9
+   |
+90 |         self.last_input = None
+91 |
+92 |     def run(self, input_data: str):
+   |         ^^^
+93 |         self.last_input = input_data
+94 |         return f"dry-run-echo:{input_data}"
+   |
+help: Add return type annotation: `str`
+
+D102 Missing docstring in public method
+  --> src/agents/deepagent.py:92:9
+   |
+90 |         self.last_input = None
+91 |
+92 |     def run(self, input_data: str):
+   |         ^^^
+93 |         self.last_input = input_data
+94 |         return f"dry-run-echo:{input_data}"
+   |
+
+I001 [*] Import block is un-sorted or un-formatted
+   --> src/agents/deepagent.py:98:5
+    |
+ 97 |   if __name__ == "__main__":
+ 98 | /     import os
+ 99 | |     import argparse
+100 | |     from dotenv import load_dotenv
+    | |__________________________________^
+101 |
+102 |       # Load environment variables from .env file in the repo root
+    |
+help: Organize imports
+
+PTH118 `os.path.join()` should be replaced by `Path` with `/` operator
+   --> src/agents/deepagent.py:103:17
+    |
+102 |     # Load environment variables from .env file in the repo root
+103 |     load_dotenv(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), ".env"))
+    |                 ^^^^^^^^^^^^
+104 |
+105 |     parser = argparse.ArgumentParser()
+    |
+
+PTH120 `os.path.dirname()` should be replaced by `Path.parent`
+   --> src/agents/deepagent.py:103:30
+    |
+102 |     # Load environment variables from .env file in the repo root
+103 |     load_dotenv(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), ".env"))
+    |                              ^^^^^^^^^^^^^^^
+104 |
+105 |     parser = argparse.ArgumentParser()
+    |
+help: Replace with `Path(...).parent`
+
+PTH120 `os.path.dirname()` should be replaced by `Path.parent`
+   --> src/agents/deepagent.py:103:46
+    |
+102 |     # Load environment variables from .env file in the repo root
+103 |     load_dotenv(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), ".env"))
+    |                                              ^^^^^^^^^^^^^^^
+104 |
+105 |     parser = argparse.ArgumentParser()
+    |
+help: Replace with `Path(...).parent`
+
+PTH120 `os.path.dirname()` should be replaced by `Path.parent`
+   --> src/agents/deepagent.py:103:62
+    |
+102 |     # Load environment variables from .env file in the repo root
+103 |     load_dotenv(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), ".env"))
+    |                                                              ^^^^^^^^^^^^^^^
+104 |
+105 |     parser = argparse.ArgumentParser()
+    |
+help: Replace with `Path(...).parent`
+
+E501 Line too long (98 > 88)
+   --> src/agents/deepagent.py:103:89
+    |
+102 |     # Load environment variables from .env file in the repo root
+103 |     load_dotenv(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), ".env"))
+    |                                                                                         ^^^^^^^^^^
+104 |
+105 |     parser = argparse.ArgumentParser()
+    |
+
+E501 Line too long (120 > 88)
+   --> src/agents/deepagent.py:106:89
+    |
+105 |     parser = argparse.ArgumentParser()
+106 |     parser.add_argument("--dry-run", dest="dry_run", action="store_true", help="Run agent in dry-run (no network) mode")
+    |                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+107 |     parser.add_argument("--provider", dest="provider", default=None, help="LLM provider to use (overrides LLM_PROVIDER env var)")
+108 |     parser.add_argument("--model", dest="model", default=None, help="Model name to use (overrides LLM_MODEL env var)")
+    |
+
+E501 Line too long (129 > 88)
+   --> src/agents/deepagent.py:107:89
+    |
+105 |     parser = argparse.ArgumentParser()
+106 |     parser.add_argument("--dry-run", dest="dry_run", action="store_true", help="Run agent in dry-run (no network) mode")
+107 |     parser.add_argument("--provider", dest="provider", default=None, help="LLM provider to use (overrides LLM_PROVIDER env var)")
+    |                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+108 |     parser.add_argument("--model", dest="model", default=None, help="Model name to use (overrides LLM_MODEL env var)")
+109 |     args = parser.parse_args()
+    |
+
+E501 Line too long (118 > 88)
+   --> src/agents/deepagent.py:108:89
+    |
+106 |     parser.add_argument("--dry-run", dest="dry_run", action="store_true", help="Run agent in dry-run (no network) mode")
+107 |     parser.add_argument("--provider", dest="provider", default=None, help="LLM provider to use (overrides LLM_PROVIDER env var)")
+108 |     parser.add_argument("--model", dest="model", default=None, help="Model name to use (overrides LLM_MODEL env var)")
+    |                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+109 |     args = parser.parse_args()
+    |
+
+TRY003 Avoid specifying long messages outside the exception class
+   --> src/agents/deepagent.py:123:23
+    |
+121 |             api_key = os.getenv("GOOGLE_GEMINI_API_KEY")
+122 |             if not api_key:
+123 |                 raise ValueError("GOOGLE_GEMINI_API_KEY not found in environment or .env file.")
+    |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+124 |         elif provider.lower() == "openai":
+125 |             api_key = os.getenv("OPENAI_API_KEY")
+    |
+
+EM101 Exception must not use a string literal, assign to variable first
+   --> src/agents/deepagent.py:123:34
+    |
+121 |             api_key = os.getenv("GOOGLE_GEMINI_API_KEY")
+122 |             if not api_key:
+123 |                 raise ValueError("GOOGLE_GEMINI_API_KEY not found in environment or .env file.")
+    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+124 |         elif provider.lower() == "openai":
+125 |             api_key = os.getenv("OPENAI_API_KEY")
+    |
+help: Assign to variable; remove string literal
+
+E501 Line too long (96 > 88)
+   --> src/agents/deepagent.py:123:89
+    |
+121 |             api_key = os.getenv("GOOGLE_GEMINI_API_KEY")
+122 |             if not api_key:
+123 |                 raise ValueError("GOOGLE_GEMINI_API_KEY not found in environment or .env file.")
+    |                                                                                         ^^^^^^^^
+124 |         elif provider.lower() == "openai":
+125 |             api_key = os.getenv("OPENAI_API_KEY")
+    |
+
+TRY003 Avoid specifying long messages outside the exception class
+   --> src/agents/deepagent.py:127:23
+    |
+125 |             api_key = os.getenv("OPENAI_API_KEY")
+126 |             if not api_key:
+127 |                 raise ValueError("OPENAI_API_KEY not found in environment or .env file.")
+    |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+128 |         elif provider.lower() == "ollama":
+129 |             api_key = None  # Ollama may not require an API key
+    |
+
+EM101 Exception must not use a string literal, assign to variable first
+   --> src/agents/deepagent.py:127:34
+    |
+125 |             api_key = os.getenv("OPENAI_API_KEY")
+126 |             if not api_key:
+127 |                 raise ValueError("OPENAI_API_KEY not found in environment or .env file.")
+    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+128 |         elif provider.lower() == "ollama":
+129 |             api_key = None  # Ollama may not require an API key
+    |
+help: Assign to variable; remove string literal
+
+E501 Line too long (89 > 88)
+   --> src/agents/deepagent.py:127:89
+    |
+125 |             api_key = os.getenv("OPENAI_API_KEY")
+126 |             if not api_key:
+127 |                 raise ValueError("OPENAI_API_KEY not found in environment or .env file.")
+    |                                                                                         ^
+128 |         elif provider.lower() == "ollama":
+129 |             api_key = None  # Ollama may not require an API key
+    |
+
+TRY003 Avoid specifying long messages outside the exception class
+   --> src/agents/deepagent.py:131:19
+    |
+129 |             api_key = None  # Ollama may not require an API key
+130 |         else:
+131 |             raise ValueError(f"Unsupported provider: {provider}")
+    |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+132 |
+133 |     agent = SDLCFlexibleAgent(provider=provider, api_key=api_key, model=model, dry_run=dry_run)
+    |
+
+EM102 Exception must not use an f-string literal, assign to variable first
+   --> src/agents/deepagent.py:131:30
+    |
+129 |             api_key = None  # Ollama may not require an API key
+130 |         else:
+131 |             raise ValueError(f"Unsupported provider: {provider}")
+    |                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+132 |
+133 |     agent = SDLCFlexibleAgent(provider=provider, api_key=api_key, model=model, dry_run=dry_run)
+    |
+help: Assign to variable; remove f-string literal
+
+E501 Line too long (95 > 88)
+   --> src/agents/deepagent.py:133:89
+    |
+131 |             raise ValueError(f"Unsupported provider: {provider}")
+132 |
+133 |     agent = SDLCFlexibleAgent(provider=provider, api_key=api_key, model=model, dry_run=dry_run)
+    |                                                                                         ^^^^^^^
+134 |     prompt = "What is the capital of France?"
+135 |     result = agent.run(prompt)
+    |
+
+T201 `print` found
+   --> src/agents/deepagent.py:136:5
+    |
+134 |     prompt = "What is the capital of France?"
+135 |     result = agent.run(prompt)
+136 |     print("Agent result:", result)
+    |     ^^^^^
+    |
+help: Remove `print`
+
+INP001 File `src/agents/executor.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/agents/executor.py:1:1
+
+D100 Missing docstring in public module
+--> src/agents/executor.py:1:1
+
+INP001 File `src/agents/planner.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/agents/planner.py:1:1
+
+D100 Missing docstring in public module
+--> src/agents/planner.py:1:1
+
+INP001 File `src/fallback/router.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/fallback/router.py:1:1
+
+D100 Missing docstring in public module
+--> src/fallback/router.py:1:1
+
+INP001 File `src/guardrails/pii.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/guardrails/pii.py:1:1
+
+D100 Missing docstring in public module
+--> src/guardrails/pii.py:1:1
+
+INP001 File `src/handlers/error_handler.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/handlers/error_handler.py:1:1
+
+D100 Missing docstring in public module
+--> src/handlers/error_handler.py:1:1
+
+INP001 File `src/llm/platforms/anthropic.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/llm/platforms/anthropic.py:1:1
+
+D100 Missing docstring in public module
+--> src/llm/platforms/anthropic.py:1:1
+
+INP001 File `src/llm/platforms/openai.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/llm/platforms/openai.py:1:1
+
+D100 Missing docstring in public module
+--> src/llm/platforms/openai.py:1:1
+
+INP001 File `src/llm/router.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/llm/router.py:1:1
+
+D100 Missing docstring in public module
+--> src/llm/router.py:1:1
+
+INP001 File `src/llm/schemas.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/llm/schemas.py:1:1
+
+D100 Missing docstring in public module
+--> src/llm/schemas.py:1:1
+
+INP001 File `src/llm/utils.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/llm/utils.py:1:1
+
+D100 Missing docstring in public module
+--> src/llm/utils.py:1:1
+
+INP001 File `src/memory/long_term.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/memory/long_term.py:1:1
+
+D100 Missing docstring in public module
+--> src/memory/long_term.py:1:1
+
+INP001 File `src/memory/short_term.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/memory/short_term.py:1:1
+
+D100 Missing docstring in public module
+--> src/memory/short_term.py:1:1
+
+INP001 File `src/pipelines/chat_flow.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/pipelines/chat_flow.py:1:1
+
+D100 Missing docstring in public module
+--> src/pipelines/chat_flow.py:1:1
+
+INP001 File `src/pipelines/doc_processor.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/pipelines/doc_processor.py:1:1
+
+D100 Missing docstring in public module
+--> src/pipelines/doc_processor.py:1:1
+
+INP001 File `src/prompt_engineering/chainer.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/prompt_engineering/chainer.py:1:1
+
+D100 Missing docstring in public module
+--> src/prompt_engineering/chainer.py:1:1
+
+INP001 File `src/prompt_engineering/few_shot.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/prompt_engineering/few_shot.py:1:1
+
+D100 Missing docstring in public module
+--> src/prompt_engineering/few_shot.py:1:1
+
+INP001 File `src/prompt_engineering/templates.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/prompt_engineering/templates.py:1:1
+
+D100 Missing docstring in public module
+--> src/prompt_engineering/templates.py:1:1
+
+INP001 File `src/retrieval/document_db.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/retrieval/document_db.py:1:1
+
+D100 Missing docstring in public module
+--> src/retrieval/document_db.py:1:1
+
+INP001 File `src/retrieval/vector_db.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/retrieval/vector_db.py:1:1
+
+D100 Missing docstring in public module
+--> src/retrieval/vector_db.py:1:1
+
+INP001 File `src/skills/code_interpreter.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/skills/code_interpreter.py:1:1
+
+D100 Missing docstring in public module
+--> src/skills/code_interpreter.py:1:1
+
+INP001 File `src/skills/web_search.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/skills/web_search.py:1:1
+
+D100 Missing docstring in public module
+--> src/skills/web_search.py:1:1
+
+INP001 File `src/utils/cache.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/utils/cache.py:1:1
+
+D100 Missing docstring in public module
+--> src/utils/cache.py:1:1
+
+INP001 File `src/utils/logger.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/utils/logger.py:1:1
+
+D100 Missing docstring in public module
+--> src/utils/logger.py:1:1
+
+INP001 File `src/utils/rate_limiter.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/utils/rate_limiter.py:1:1
+
+D100 Missing docstring in public module
+--> src/utils/rate_limiter.py:1:1
+
+INP001 File `src/utils/token_counter.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/utils/token_counter.py:1:1
+
+D100 Missing docstring in public module
+--> src/utils/token_counter.py:1:1
+
+INP001 File `src/vision_audio/image_processor.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/vision_audio/image_processor.py:1:1
+
+D100 Missing docstring in public module
+--> src/vision_audio/image_processor.py:1:1
+
+INP001 File `src/vision_audio/speech_handler.py` is part of an implicit namespace package. Add an `__init__.py`.
+--> src/vision_audio/speech_handler.py:1:1
+
+D100 Missing docstring in public module
+--> src/vision_audio/speech_handler.py:1:1
+
+Found 115 errors.
+[*] 8 fixable with the `--fix` option (18 hidden fixes can be enabled with the `--unsafe-fixes` option).

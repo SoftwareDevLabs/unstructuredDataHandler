@@ -1,0 +1,6 @@
+Collecting ruff==0.12.9
+  Downloading ruff-0.12.9-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (25 kB)
+Downloading ruff-0.12.9-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (13.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.0/13.0 MB 58.6 MB/s  0:00:00
+Installing collected packages: ruff
+Successfully installed ruff-0.12.9

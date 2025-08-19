@@ -1,0 +1,13 @@
+CI and testability improvements for DeepAgent (dry-run, tests, CI)
+
+- Added dry-run / MockAgent and an EchoTool to make DeepAgent importable and testable without provider APIs.
+- Added offline unit tests for DeepAgent and provider selection. Local run: 5 tests passed.
+- Added reproducible test runner (`scripts/run-tests.sh`), `Makefile` targets, and updated README with instructions.
+- Adjusted `requirements.txt` to remove unavailable pins and pin validated provider adapters.
+- Consolidated CI workflow `.github/workflows/python-test.yml` (ruff + mypy + pytest + codecov). Provider matrix is manual and must be dispatched by a user with repo:actions permissions.
+
+Static checks: `src/agents/deepagent.py` passes ruff; repo-wide ruff still reports ~115 items (plan to fix in small batches).
+
+Notes:
+- mypy reports a duplicate-module issue for router modules; CI excludes `src/llm/router.py` until a refactor is done.
+- Provider matrix run needs a manual dispatch in Actions (set run_providers=true) or a user with proper `gh` permissions.
