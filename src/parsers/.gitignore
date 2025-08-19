@@ -1,0 +1,7 @@
+# Ignore database files created during testing
+*.db
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+*.pyo
