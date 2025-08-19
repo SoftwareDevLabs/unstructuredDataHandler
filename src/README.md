@@ -4,7 +4,10 @@ This directory contains all the relevants source code important to the software.
 
 ```
 📁 src/ → The core engine — all logic lives here:
-├── agents/ → Agent classes: planner, executor, base agent
+├── agents/ → Agent classes: planner, executor, base agent, deepagent (LangChain DeepAgent integration)
+4. **DeepAgent Integration** (`src/agents/deepagent.py`)
+   - Integrates LangChain's DeepAgent workflow for advanced agent capabilities
+   - Example usage and configuration provided in the module
 │
 ├── memory/ → Short-term and long-term memory modules
 │

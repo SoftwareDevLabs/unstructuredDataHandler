@@ -1,0 +1,9 @@
+src/agents/deepagent.py:12: error: Cannot assign to a type  [misc]
+src/agents/deepagent.py:12: error: Incompatible types in assignment (expression has type "None", variable has type "type[GoogleGenerativeAI]")  [assignment]
+src/agents/deepagent.py:43: error: Incompatible default for argument "api_key" (default has type "None", argument has type "str")  [assignment]
+src/agents/deepagent.py:43: note: PEP 484 prohibits implicit Optional. Accordingly, mypy has changed its default to no_implicit_optional=True
+src/agents/deepagent.py:43: note: Use https://github.com/hauntsaninja/no_implicit_optional to automatically upgrade your codebase
+src/agents/deepagent.py:43: error: Incompatible default for argument "model" (default has type "None", argument has type "str")  [assignment]
+src/agents/deepagent.py:77: error: Incompatible types in assignment (expression has type "AgentExecutor", variable has type "MockAgent")  [assignment]
+src/agents/deepagent.py:133: error: Argument "api_key" to "SDLCFlexibleAgent" has incompatible type "str | None"; expected "str"  [arg-type]
+Found 6 errors in 1 file (checked 1 source file)
