@@ -67,7 +67,7 @@ class SDLCFlexibleAgent:
         config_path: Path to the model configuration file.
         kwargs: Additional LLM-specific arguments
         """
-        with open(config_path, 'r') as f:
+        with open(config_path, 'r', encoding='utf-8') as f:
             config = yaml.safe_load(f)
 
         provider = provider or config.get('default_provider')
