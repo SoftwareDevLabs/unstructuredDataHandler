@@ -146,7 +146,8 @@ class MockAgent:
         self.last_input = None
 
     def invoke(self, input_dict: dict, config: dict):
-        self.last_input = input_dict["input"]
+    def invoke(self, input: dict, config: dict):
+        self.last_input = input["input"]
         return {"output": f"dry-run-echo:{self.last_input}"}
 
 
