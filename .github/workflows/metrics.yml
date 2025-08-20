@@ -1,6 +1,8 @@
 # GitHub Metrics
 # This workflow generates a metrics SVG and commits it to the repository
 name: Metrics Embed
+permissions:
+  contents: write
 
 on:
   schedule: [{cron: "0 0 * * 0"}] # every week
