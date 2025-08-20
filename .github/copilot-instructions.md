@@ -197,8 +197,10 @@ setup.py              → Python package setup (currently empty)
 1. **Install dependencies**: `pip install pytest pytest-cov mypy pylint`
 2. **Set Python path**: `export PYTHONPATH=.` or prefix commands with `PYTHONPATH=.`
 3. **Test before changing**: `PYTHONPATH=. python -m pytest test/ -v` to validate current state
-4. **Check module imports**: Ensure new Python modules have proper `__init__.py` files
-5. **Follow branch naming**: Use `dev/<alias>/<feature>` pattern for feature branches
+4. **Configure the agent**: Edit `config/model_config.yaml` to configure the agent before running it.
+5. **Check module imports**: Ensure new Python modules have proper `__init__.py` files
+6. **Follow branch naming**: Use `dev/<alias>/<feature>` pattern for feature branches
+7. **Fill out the PR template**: Ensure the PR template at `.github/PULL_REQUEST_TEMPLATE.md` is filled out before submitting a new PR.
 
 **NEVER do the following:**
 - Run tests without setting PYTHONPATH

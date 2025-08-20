@@ -1,0 +1,17 @@
+default_provider: gemini
+default_model: chat-bison-001
+
+providers:
+  gemini:
+    default_model: chat-bison-001
+  openai:
+    default_model: gpt-3.5-turbo
+  ollama:
+    default_model: llama2
+
+agent:
+  type: ZERO_SHOT_REACT_DESCRIPTION
+  verbose: true
+  memory:
+    enabled: true
+    type: ConversationBufferMemory

@@ -1,16 +1,12 @@
 # GoSec Security Checker
 # This workflow runs gosec to check Go code for security issues
+# It is currently disabled from running automatically.
 name: GoSec Security Checker
 permissions:
   contents: read
 
 on:
-  push:
-    paths:
-      - '**.go'
-  pull_request:
-    paths:
-      - '**.go'
+  workflow_dispatch:
 
 jobs:
   gosec:

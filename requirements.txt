@@ -1,18 +1,8 @@
-
 langchain==0.3.27
-# Note: `langchain-deepagent` is not published on PyPI at the pinned version and
-# caused CI install failures. It's intentionally omitted here; install any
-# deepagent/local adapters manually or in provider-specific CI jobs.
-
-# Keep provider adapters optional; install them per-job if needed
-# Provider adapters (optional) - pinned to validated versions from the dev environment
 langchain-google-genai==2.1.9
 langchain-community==0.3.27
-# Ollama adapter left unpinned (install per-job if needed)
 langchain-ollama==0.3.6
-
-# python-dotenv used by the module when running locally
-python-dotenv==1.1.1
-
-# Test/runtime helpers
-pytest==8.4.1
+fastapi==0.111.0
+uvicorn==0.29.0
+psycopg2-binary==2.9.9
+PyYAML==6.0.1

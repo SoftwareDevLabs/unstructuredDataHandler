@@ -1,7 +1,0 @@
-# Python Unit Tests & Static Analysis
-# This workflow runs unit tests and static code analysis
-name: Python Tests and Static Analysis (legacy)
-
-# This workflow has been consolidated into .github/workflows/python-test.yml.
-# Left here for documentation/history. The consolidated workflow runs static analysis
-# and a test matrix plus a focused deepagent test stage.

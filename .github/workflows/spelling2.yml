@@ -98,12 +98,12 @@ jobs:
           suppress_push_for_open_pull_request: ${{ github.actor != 'dependabot[bot]' && 1 }}
           checkout: true
           check_file_names: 1
-          spell_check_this: microsoft/terminal@main
+          spell_check_this: ${{ github.repository }}@${{ github.ref }}
           post_comment: 0
           use_magic_file: 1
           report-timing: 1
           warnings: bad-regex,binary-file,deprecated-feature,ignored-expect-variant,large-file,limited-references,no-newline-at-eof,noisy-file,non-alpha-in-dictionary,token-is-substring,unexpected-line-ending,whitespace-in-dictionary,minified-file,unsupported-configuration,no-files-to-check,unclosed-block-ignore-begin,unclosed-block-ignore-end
-          experimental_apply_changes_via_bot: ${{ github.repository_owner != 'microsoft' && 1 }}
+          experimental_apply_changes_via_bot: ${{ github.repository_owner != 'SoftwareDevLabs' && 1 }}
           use_sarif: 1
           check_extra_dictionaries: ""
           dictionary_source_prefixes: >
@@ -161,7 +161,7 @@ jobs:
         uses: check-spelling/check-spelling@v0.0.25
         with:
           checkout: true
-          spell_check_this: microsoft/terminal@main
+          spell_check_this: ${{ github.repository }}@${{ github.ref }}
           task: ${{ needs.spelling.outputs.followup }}
 
   comment-pr:
@@ -179,9 +179,9 @@ jobs:
         uses: check-spelling/check-spelling@v0.0.25
         with:
           checkout: true
-          spell_check_this: microsoft/terminal@main
+          spell_check_this: ${{ github.repository }}@${{ github.ref }}
           task: ${{ needs.spelling.outputs.followup }}
-          experimental_apply_changes_via_bot: ${{ github.repository_owner != 'microsoft' && 1 }}
+          experimental_apply_changes_via_bot: ${{ github.repository_owner != 'SoftwareDevLabs' && 1 }}
 
   update:
     name: Update PR
@@ -191,7 +191,7 @@ jobs:
       actions: read
     runs-on: ubuntu-latest
     if: ${{
-      github.repository_owner != 'microsoft' &&
+      github.repository_owner != 'SoftwareDevLabs' &&
       github.event_name == 'issue_comment' &&
       github.event.issue.pull_request &&
       contains(github.event.comment.body, '@check-spelling-bot apply') &&
