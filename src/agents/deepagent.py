@@ -162,7 +162,7 @@ def main():
     args = parser.parse_args()
 
     # Load environment variables from .env file
-    load_dotenv()
+    load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 
     api_key = None
     if not args.dry_run:
