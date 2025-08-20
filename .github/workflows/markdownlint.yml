@@ -1,6 +1,8 @@
 # Markdown Lint
 # This workflow runs markdownlint on all Markdown files in the repository
 name: Markdown Lint
+permissions:
+  contents: read
 
 on:
   push:
