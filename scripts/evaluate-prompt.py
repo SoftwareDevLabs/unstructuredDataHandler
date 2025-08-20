@@ -34,7 +34,7 @@ def main():
     response = agent.run(prompt)
 
     with open(args.output_file, 'w') as f:
-        f.write(response)
+        f.write(response.get('output', ''))
 
 if __name__ == "__main__":
     main()
