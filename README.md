@@ -78,6 +78,18 @@ Documentation](https://github.com/SoftwareDevLabs) repository.
 ```
 ---
 
+## 🚀 Modules
+
+### Agents
+
+The `agents` module provides the core components for creating AI agents. It includes a flexible `SDLCFlexibleAgent` that can be configured to use different LLM providers (like OpenAI, Gemini, and Ollama) and a set of tools. The module is designed to be extensible, allowing for the creation of custom agents with specialized skills. Key components include a planner and an executor (currently placeholders for future development) and a `MockAgent` for testing and CI.
+
+### Parsers
+
+The `parsers` module is a powerful utility for parsing various diagram-as-code formats, including PlantUML, Mermaid, and DrawIO. It extracts structured information from diagram files, such as elements, relationships, and metadata, and stores it in a local SQLite database. This allows for complex querying, analysis, and export of diagram data. The module is built on a base parser abstraction, making it easy to extend with new diagram formats. It also includes a suite of utility functions for working with the diagram database, such as exporting to JSON/CSV, finding orphaned elements, and detecting circular dependencies.
+
+---
+
 ## ⚡ Best Practices
 
 - Track prompt versions and results  

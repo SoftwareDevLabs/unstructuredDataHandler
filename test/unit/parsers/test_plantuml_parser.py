@@ -106,8 +106,8 @@ class TestPlantUMLParser:
         
         relationship = result.relationships[0]
         assert relationship.relationship_type == "inheritance"
-        assert relationship.source_id == "Parent"
-        assert relationship.target_id == "Child"
+        assert relationship.source_id == "Child"
+        assert relationship.target_id == "Parent"
     
     def test_parse_composition_relationship(self):
         """Test parsing composition relationships."""

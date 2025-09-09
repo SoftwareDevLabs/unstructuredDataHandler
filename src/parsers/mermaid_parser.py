@@ -175,76 +175,84 @@ class MermaidParser(BaseParser):
     def _parse_flowchart(self, content: str, diagram: ParsedDiagram):
         """Parse flowchart/graph diagram."""
         lines = content.split('\n')[1:]  # Skip diagram type line
-        
-        # Track created nodes to avoid duplicates
         created_nodes = set()
-        
+
+        def parse_and_create_node(node_str: str):
+            """Parse a node string and create a DiagramElement if it doesn't exist."""
+            node_str = node_str.strip()
+            node_patterns = [
+                (r'^(\w+)\s*\(\((.*)\)\)$', 'circle'),
+                (r'^(\w+)\s*\[(.*)\]$', 'rectangular'),
+                (r'^(\w+)\s*\((.*)\)$', 'rounded'),
+                (r'^(\w+)\s*\{(.*)\}$', 'diamond'),
+            ]
+            for pattern, shape in node_patterns:
+                match = re.match(pattern, node_str)
+                if match:
+                    node_id, label = match.groups()
+                    if node_id not in created_nodes:
+                        element = DiagramElement(
+                            id=node_id, element_type=ElementType.COMPONENT,
+                            name=label, properties={'shape': shape}, tags=[]
+                        )
+                        diagram.elements.append(element)
+                        created_nodes.add(node_id)
+                    return node_id
+            
+            node_id = node_str
+            if node_id and node_id not in created_nodes:
+                element = DiagramElement(
+                    id=node_id, element_type=ElementType.COMPONENT,
+                    name=node_id, properties={'shape': 'simple'}, tags=[]
+                )
+                diagram.elements.append(element)
+                created_nodes.add(node_id)
+            return node_id
+
         for line in lines:
             line = line.strip()
             if not line:
                 continue
-            
-            # Node definitions with labels: A[Label] or A(Label) or A{Label}
-            node_patterns = [
-                (r'(\w+)\[([^\]]+)\]', 'rectangular'),
-                (r'(\w+)\(([^)]+)\)', 'rounded'),
-                (r'(\w+)\{([^}]+)\}', 'diamond'),
-                (r'(\w+)\(\(([^)]+)\)\)', 'circle'),
-            ]
-            
-            for pattern, shape in node_patterns:
-                match = re.search(pattern, line)
-                if match:
-                    node_id = match.group(1)
-                    label = match.group(2)
-                    
-                    if node_id not in created_nodes:
-                        element = DiagramElement(
-                            id=node_id,
-                            element_type=ElementType.COMPONENT,
-                            name=label,
-                            properties={'shape': shape},
-                            tags=[]
-                        )
-                        diagram.elements.append(element)
-                        created_nodes.add(node_id)
-            
-            # Connection patterns: A --> B or A --- B
+
             connection_patterns = [
-                (r'(\w+)\s*-->\s*(\w+)', 'directed'),
-                (r'(\w+)\s*---\s*(\w+)', 'undirected'),
-                (r'(\w+)\s*-\.->\s*(\w+)', 'dotted'),
-                (r'(\w+)\s*==>\s*(\w+)', 'thick'),
+                (r'-->', 'directed'), (r'---', 'undirected'),
+                (r'-.->', 'dotted'), (r'==>', 'thick')
             ]
             
-            for pattern, style in connection_patterns:
-                match = re.search(pattern, line)
-                if match:
-                    source = match.group(1)
-                    target = match.group(2)
+            found_connection = False
+            for arrow, style in connection_patterns:
+                if arrow in line:
+                    parts = line.split(arrow, 1)
+                    source_str = parts[0]
+                    target_and_label_str = parts[1]
+
+                    label_match = re.match(r'\s*\|(.*?)\|(.*)', target_and_label_str)
+                    if label_match:
+                        label = label_match.group(1)
+                        target_str = label_match.group(2).strip()
+                    else:
+                        label = None
+                        target_str = target_and_label_str.strip()
                     
-                    # Create nodes if they don't exist (simple node without labels)
-                    for node_id in [source, target]:
-                        if node_id not in created_nodes:
-                            element = DiagramElement(
-                                id=node_id,
-                                element_type=ElementType.COMPONENT,
-                                name=node_id,
-                                properties={'shape': 'simple'},
-                                tags=[]
-                            )
-                            diagram.elements.append(element)
-                            created_nodes.add(node_id)
+                    source_id = parse_and_create_node(source_str)
+                    target_id = parse_and_create_node(target_str)
                     
-                    relationship = DiagramRelationship(
-                        id=f"rel_{len(diagram.relationships) + 1}",
-                        source_id=source,
-                        target_id=target,
-                        relationship_type='connection',
-                        properties={'style': style},
-                        tags=[]
-                    )
-                    diagram.relationships.append(relationship)
+                    if source_id and target_id:
+                        properties = {'style': style}
+                        if label:
+                            properties['label'] = label
+
+                        relationship = DiagramRelationship(
+                            id=f"rel_{len(diagram.relationships) + 1}",
+                            source_id=source_id, target_id=target_id,
+                            relationship_type='connection', properties=properties, tags=[]
+                        )
+                        diagram.relationships.append(relationship)
+                        found_connection = True
+                        break
+
+            if not found_connection:
+                parse_and_create_node(line)
     
     def _parse_sequence_diagram(self, content: str, diagram: ParsedDiagram):
         """Parse sequence diagram."""
@@ -278,7 +286,7 @@ class MermaidParser(BaseParser):
             message_patterns = [
                 (r'(\w+)\s*->>\s*(\w+)\s*:\s*(.+)', 'async_message'),
                 (r'(\w+)\s*->\s*(\w+)\s*:\s*(.+)', 'sync_message'),
-                (r'(\w+)\s*-->\s*(\w+)\s*:\s*(.+)', 'return_message'),
+                (r'(\w+)\s*-->>\s*(\w+)\s*:\s*(.+)', 'return_message'),
             ]
             
             for pattern, msg_type in message_patterns:
@@ -314,54 +322,37 @@ class MermaidParser(BaseParser):
     
     def _parse_er_diagram(self, content: str, diagram: ParsedDiagram):
         """Parse entity-relationship diagram."""
-        lines = content.split('\n')[1:]  # Skip diagram type line
+        # Parse entities first, handling multiline blocks
+        entity_pattern = r'(\w+)\s*\{([^}]*)\}'
+        entities_found = re.findall(entity_pattern, content, re.DOTALL)
         
+        for entity_name, attributes_text in entities_found:
+            attributes = []
+            if attributes_text:
+                attr_lines = [attr.strip() for attr in attributes_text.split('\n') if attr.strip()]
+                for attr_line in attr_lines:
+                    if attr_line:
+                        attributes.append(attr_line)
+
+            element = DiagramElement(
+                id=entity_name,
+                element_type=ElementType.ENTITY,
+                name=entity_name,
+                properties={'attributes': attributes},
+                tags=[]
+            )
+            diagram.elements.append(element)
+
+        # Remove entity blocks from content to parse relationships
+        content_after_entities = re.sub(entity_pattern, '', content, flags=re.DOTALL)
+        lines = content_after_entities.split('\n')
+
         for line in lines:
             line = line.strip()
             if not line:
                 continue
-            
-            # Entity definition with attributes: ENTITY { attr1 attr2 }
-            entity_match = re.match(r'(\w+)\s*\{([^}]*)\}', line)
-            if entity_match:
-                entity_name = entity_match.group(1)
-                attributes_text = entity_match.group(2)
                 
-                attributes = []
-                if attributes_text:
-                    attr_lines = [attr.strip() for attr in attributes_text.split('\n') if attr.strip()]
-                    for attr_line in attr_lines:
-                        if attr_line:  # Skip empty lines
-                            attributes.append(attr_line)
-                
-                element = DiagramElement(
-                    id=entity_name,
-                    element_type=ElementType.ENTITY,
-                    name=entity_name,
-                    properties={'attributes': attributes},
-                    tags=[]
-                )
-                diagram.elements.append(element)
-                continue
-            
-            # Entity definition without attributes: ENTITY
-            simple_entity_match = re.match(r'^(\w+)$', line)
-            if simple_entity_match and not any(rel_pattern in line for rel_pattern in ['||', '}o', 'o{', '--']):
-                entity_name = simple_entity_match.group(1)
-                
-                # Check if entity already exists
-                if not any(elem.id == entity_name for elem in diagram.elements):
-                    element = DiagramElement(
-                        id=entity_name,
-                        element_type=ElementType.ENTITY,
-                        name=entity_name,
-                        properties={'attributes': []},
-                        tags=[]
-                    )
-                    diagram.elements.append(element)
-                continue
-            
-            # Relationship patterns: A ||--o{ B
+            # Relationship patterns
             rel_patterns = [
                 (r'(\w+)\s*\|\|--o\{\s*(\w+)', 'one_to_many'),
                 (r'(\w+)\s*\}o--\|\|\s*(\w+)', 'many_to_one'),
@@ -370,10 +361,9 @@ class MermaidParser(BaseParser):
             ]
             
             for pattern, rel_type in rel_patterns:
-                match = re.match(pattern, line)
+                match = re.search(pattern, line)
                 if match:
-                    source = match.group(1)
-                    target = match.group(2)
+                    source, target = match.groups()
                     
                     relationship = DiagramRelationship(
                         id=f"rel_{len(diagram.relationships) + 1}",

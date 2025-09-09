@@ -58,10 +58,9 @@ class PlantUMLParser(BaseParser):
         # Remove single-line comments
         content = re.sub(r"'.*$", "", content, flags=re.MULTILINE)
         
-        # Normalize whitespace
-        content = re.sub(r'\s+', ' ', content)
-        
-        return content.strip()
+        # Normalize whitespace but preserve line structure
+        lines = [line.strip() for line in content.split('\n') if line.strip()]
+        return '\n'.join(lines)
     
     def _extract_metadata(self, content: str) -> Dict[str, Any]:
         """Extract metadata like title, skinparam, etc."""
@@ -205,7 +204,7 @@ class PlantUMLParser(BaseParser):
             # Association: A -- B, A --> B
             (r'(\w+)\s*-->\s*(\w+)', 'association', 'normal'),
             (r'(\w+)\s*<--\s*(\w+)', 'association', 'reverse'),
-            (r'(\w+)\s*--\s*(\w+)(?!\*|o|\|)', 'association', 'normal'),
+            (r'\b(?!o|O|\*)\w+\b\s*--\s*\b\w+\b', 'association', 'normal'),
             
             # Dependency: A ..> B, A <.. B
             (r'(\w+)\s*\.\.>\s*(\w+)', 'dependency', 'normal'),
