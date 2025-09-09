@@ -1,6 +1,8 @@
 # Python Style Check
 # This workflow checks Python code style using flake8
 name: Python Style Check
+permissions:
+  contents: read
 
 on:
   push:

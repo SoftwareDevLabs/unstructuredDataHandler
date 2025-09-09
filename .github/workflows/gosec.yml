@@ -1,6 +1,8 @@
 # GoSec Security Checker
 # This workflow runs gosec to check Go code for security issues
 name: GoSec Security Checker
+permissions:
+  contents: read
 
 on:
   push:
