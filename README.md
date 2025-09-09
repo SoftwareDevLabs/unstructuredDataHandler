@@ -7,86 +7,60 @@
 
 - [Installing and running Windows Terminal](#installing-and-running-windows-terminal)
 - [Module Roadmap](#SDLC_core-roadmap)
-- [SDLC_core Overview](#terminal--console-overview)
-  - [Key Component 1](#key-component-1)
-  - [Key Component 2](#key-component-2)
-  - [Shared Components](#shared-components)
+- [SDLC_core Overview](#sdlc_core-overview)
 - [Resources](#resources)
 - [FAQ](#faq)
 - [Documentation](#documentation)
 - [Contributing](#contributing)
 - [Communicating with the Team](#communicating-with-the-team)
 - [Developer Guidance](#developer-guidance)
-- [Prerequisites](#prerequisites)
-- [Building the Code](#building-the-code)
-- [Running \& Debugging](#running--debugging)
-  - [Coding Guidance](#coding-guidance)
 - [Code of Conduct](#code-of-conduct)
 
 </details>
 
 <br />
 
-This repository contains the source code for:
-
-* [SDLC_core](add link)
-* Components shared between the two projects
-* --
+This repository contains the source code for the SDLC_core project, a Python-based framework for building AI-powered software development life cycle tools.
 
 Related repositories include:
 
-* [SDLC_core Documentation](add link)
-  ([Repo: Contribute to the docs](https://github.com/SoftwareDevLabs))
-* --
-
-## Installing and running Windows Terminal
-
-> [!NOTE]
-> Add the detials here
+* [SDLC_core Documentation](https://github.com/SoftwareDevLabs) (Placeholder)
 
 ## SDLC_core Roadmap
 
 The plan for the SDLC_core [is described here](./doc/roadmap-20xx.md) and
 will be updated as the project proceeds.
 
+## Installing and running Windows Terminal
+
+> [!NOTE]
+> This section is a placeholder and may not be relevant to this project.
+
 ## SDLC_core Overview
 
-Please take a few minutes to review the overview below before diving into the
-code:
-
-### Key Component 1
-
-
-
-### Key Component 2
-
-
-
-### Shared Components
-
-
-
+SDLC_core is a Python-based Software Development Life Cycle core project that provides AI/ML capabilities for software development workflows. The repository contains modules for LLM clients, intelligent agents, memory management, prompt engineering, document retrieval, skill execution, and various utilities. It combines a Python core with TypeScript for Azure DevOps pipeline configurations.
 
 ## Resources
 
-For more information about SDLC_core, you may find some of these
-resources useful and interesting:
+> [!NOTE]
+> This section is a placeholder. Please add relevant links.
 
 * [Link 1](add link)
 * [Link 2](add link)
 
-
 ## FAQ
+
+> [!NOTE]
+> This section is a placeholder. Please add frequently asked questions.
 
 ### Q1
 ### Q2
-### ...
 
 ## Documentation
 
 All project documentation is located at [softwaremodule-docs](./doc/). If you would like
 to contribute to the documentation, please submit a pull request on the [SDLC_core
-Documentation](https://github.com/SoftwareDevLabs).
+Documentation](https://github.com/SoftwareDevLabs) repository.
 
 ---
 
@@ -120,11 +94,15 @@ Documentation](https://github.com/SoftwareDevLabs).
 
 ## 🧭 Getting Started
 
-1. Clone the repo  
-2. Install via `requirements.txt`  
-3. Set up model configs  
-4. Check sample code  
-5. Begin in notebooks  
+1.  **Clone the repository.**
+2.  **Set up your Python environment.** A Python version between 3.10 and 3.12 is recommended.
+3.  **Install dependencies.** The project's dependencies are split into several files. For general development, you will need `requirements-dev.txt`.
+    ```bash
+    pip install -r requirements-dev.txt
+    ```
+4.  **Set up your environment variables.** Copy the `.env.template` file to `.env` and fill in the required API keys for the LLM providers you want to use.
+5.  **Explore the examples.** The `examples/` directory contains scripts that demonstrate the key features of the project.
+6.  **Experiment in notebooks.** The `notebooks/` directory is a great place to start experimenting with the codebase.
 
 ---
 
@@ -141,9 +119,12 @@ Documentation](https://github.com/SoftwareDevLabs).
 
 ## 📁 Core Files
 
-- `requirements.txt` – Package dependencies  
-- `README.md` – Project overview and usage  
-- `Dockerfile` – Container build instructions  
+- `requirements.txt` – Core package dependencies for the project.
+- `requirements-dev.txt` - Dependencies for development and testing.
+- `requirements-docs.txt` - Dependencies for generating documentation.
+- `AGENTS.md` - Instructions for AI agents working with this repository.
+- `README.md` – Project overview and usage.
+- `Dockerfile` – Container build instructions.
 
 ## Running tests
 
@@ -172,8 +153,7 @@ make lint
 
 ## Contributing
 
-We are excited to work alongside you, our amazing community, to build and
-enhance Windows Terminal\!
+We are excited to work with the community to build and enhance this project.
 
 ***BEFORE you start work on a feature/fix***, please read & follow our [Contributor's Guide](./CONTRIBUTING.md) to
 help avoid any wasted or duplicate effort.
@@ -184,25 +164,9 @@ The easiest way to communicate with the team is via GitHub issues.
 
 Please file new issues, feature requests and suggestions, but **DO search for similar open/closed preexisting issues before creating a new issue.**
 
-If you would like to ask a question that you feel doesn't warrant an issue (yet), please reach out to us via Twitter:
-
- - contact [info@softwaredevlabs.com][conduct-email]
+If you would like to ask a question that you feel doesn't warrant an issue (yet), please reach out to us via email: [info@softwaredevlabs.com][conduct-email]
 
 ## Developer Guidance
-
-## Prerequisites
-
-
-### Configuration
-
-
-## Building the Code
-
-
-## Running & Debugging
-
-
-### Coding Guidance
 
 Please review these brief docs below about our coding practices.
 

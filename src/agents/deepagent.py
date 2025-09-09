@@ -1,8 +1,13 @@
 """LangChain agent integration using OpenAI LLM and standard tools."""
 
+import os
+import yaml
 from typing import Any, Optional, List
 
-from langchain.agents import initialize_agent, AgentType
+from langchain.agents import AgentExecutor, create_tool_calling_agent
+from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_community.chat_message_histories import ChatMessageHistory
+from langchain_core.runnables.history import RunnableWithMessageHistory
 
 # LLM names declared as Any so mypy accepts fallback to None if imports fail
 GoogleGenerativeAI: Any
@@ -45,11 +50,12 @@ class SDLCFlexibleAgent:
     """
     def __init__(
         self,
-        provider: str,
+        provider: Optional[str] = None,
         api_key: Optional[str] = None,
         model: Optional[str] = None,
         tools: Optional[List[Any]] = None,
         dry_run: bool = False,
+        config_path: str = "config/model_config.yaml",
         **kwargs,
     ) -> None:
         """
@@ -57,55 +63,81 @@ class SDLCFlexibleAgent:
         api_key: API key for the provider (if required)
         model: Model name (if required)
         tools: Optional list of tools
+        dry_run: If True, use a mock agent for testing.
+        config_path: Path to the model configuration file.
         kwargs: Additional LLM-specific arguments
         """
+        with open(config_path, 'r', encoding='utf-8') as f:
+            config = yaml.safe_load(f)
+
+        provider = provider or config.get('default_provider')
         provider = provider.lower()
+
         self.dry_run = bool(dry_run)
-        # typed instance attributes for mypy
         self.llm: Any = None
         self.agent: Any = None
-        # In dry-run mode, avoid creating real LLMs or network calls
+        self.store = {} # In-memory session store
+
         if self.dry_run:
-            # Use a no-network mock LLM and a MockAgent below
-            self.llm = None
-            if tools is None:
-                self.tools = [EchoTool()]
-            else:
-                self.tools = tools
+            self.tools = tools or [EchoTool()]
             self.agent = MockAgent()
             return
-        if provider == "gemini" or provider == "google":
-            # Use GoogleGenerativeAI from langchain-google-genai
-            gemini_model = model or "chat-bison-001"
-            self.llm = GoogleGenerativeAI(
-                google_api_key=api_key,
-                model=gemini_model,
-                **kwargs,
-            )
-        elif provider == "openai":
-            self.llm = OpenAI(openai_api_key=api_key, model=model or "gpt-3.5-turbo", **kwargs)
-        elif provider == "ollama" and Ollama is not None:
-            self.llm = Ollama(model=model or "llama2", **kwargs)
-        else:
-            raise ValueError(f"Unsupported or unavailable provider: {provider}")
-        if tools is None:
-            self.tools = [EchoTool()]
-        else:
-            self.tools = tools
-        # initialize_agent returns an executor; keep as Any for flexibility in dry-run tests
-        self.agent = initialize_agent(
-            self.tools,
-            self.llm,
-            agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
-            verbose=not self.dry_run,
+
+        # Configure agent from YAML
+        agent_config = config.get('agent', {})
+        verbose = agent_config.get('verbose', True)
+
+        # Configure provider
+        provider_config = config.get('providers', {}).get(provider, {})
+        model = model or provider_config.get('default_model')
+
+        try:
+            if provider == "gemini" or provider == "google":
+                self.llm = GoogleGenerativeAI(google_api_key=api_key, model=model, **kwargs)
+            elif provider == "openai":
+                self.llm = OpenAI(openai_api_key=api_key, model=model, **kwargs)
+            elif provider == "ollama" and Ollama is not None:
+                self.llm = Ollama(model=model, **kwargs)
+            else:
+                raise ValueError(f"Unsupported or unavailable provider: {provider}")
+        except Exception as e:
+            raise RuntimeError(f"Failed to initialize LLM provider '{provider}': {e}") from e
+
+        self.tools = tools or [EchoTool()]
+
+        prompt = ChatPromptTemplate.from_messages(
+            [
+                ("system", "You are a helpful assistant."),
+                MessagesPlaceholder(variable_name="chat_history"),
+                ("human", "{input}"),
+                MessagesPlaceholder(variable_name="agent_scratchpad"),
+            ]
         )
 
-    def run(self, input_data: str):
+        agent = create_tool_calling_agent(self.llm, self.tools, prompt)
+        agent_executor = AgentExecutor(agent=agent, tools=self.tools, verbose=verbose)
+
+        def get_session_history(session_id: str) -> ChatMessageHistory:
+            if session_id not in self.store:
+                self.store[session_id] = ChatMessageHistory()
+            return self.store[session_id]
+
+        self.agent = RunnableWithMessageHistory(
+            agent_executor,
+            get_session_history,
+            input_messages_key="input",
+            history_messages_key="chat_history",
+        )
+
+
+    def run(self, input_data: str, session_id: str = "default"):
         """
         Run the agent on the provided input data (prompt).
         """
-        # If dry-run, MockAgent implements run; otherwise call the agent
-        return self.agent.run(input_data)
+        return self.agent.invoke(
+            {"input": input_data},
+            config={"configurable": {"session_id": session_id}},
+        )
 
 
 class MockAgent:
@@ -113,48 +145,45 @@ class MockAgent:
     def __init__(self):
         self.last_input = None
 
-    def run(self, input_data: str):
-        self.last_input = input_data
-        return f"dry-run-echo:{input_data}"
+    def invoke(self, input_dict: dict, config: dict):
+    def invoke(self, input: dict, config: dict):
+        self.last_input = input["input"]
+        return {"output": f"dry-run-echo:{self.last_input}"}
 
 
-if __name__ == "__main__":
-    import os
-    import argparse
-    from dotenv import load_dotenv
-
-    # Load environment variables from .env file in the repo root
-    load_dotenv(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), ".env"))
-
+def main():
+    """Main function to run the agent from the command line."""
     parser = argparse.ArgumentParser()
-    parser.add_argument("--dry-run", dest="dry_run", action="store_true", help="Run agent in dry-run (no network) mode")
-    parser.add_argument("--provider", dest="provider", default=None, help="LLM provider to use (overrides LLM_PROVIDER env var)")
-    parser.add_argument("--model", dest="model", default=None, help="Model name to use (overrides LLM_MODEL env var)")
+    parser.add_argument("--dry-run", action="store_true", help="Run agent in dry-run mode")
+    parser.add_argument("--provider", help="LLM provider to use")
+    parser.add_argument("--model", help="Model name to use")
+    parser.add_argument("--prompt", default="What is the capital of France?", help="The prompt to run")
+    parser.add_argument("--session-id", default="default", help="The session ID for the conversation")
     args = parser.parse_args()
 
-    provider = args.provider or os.getenv("LLM_PROVIDER", "gemini")
-    model = args.model or os.getenv("LLM_MODEL", None)
+    # Load environment variables from .env file
+    load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
+
     api_key = None
-
-    # DRY_RUN environment or flag
-    dry_run_env = os.getenv("DRY_RUN", "false").lower() in ("1", "true", "yes")
-    dry_run = dry_run_env or bool(args.dry_run)
-
-    if not dry_run:
-        if provider.lower() == "gemini" or provider.lower() == "google":
+    if not args.dry_run:
+        if args.provider and (args.provider.lower() == "gemini" or args.provider.lower() == "google"):
             api_key = os.getenv("GOOGLE_GEMINI_API_KEY")
-            if not api_key:
-                raise ValueError("GOOGLE_GEMINI_API_KEY not found in environment or .env file.")
-        elif provider.lower() == "openai":
+        elif args.provider and args.provider.lower() == "openai":
             api_key = os.getenv("OPENAI_API_KEY")
-            if not api_key:
-                raise ValueError("OPENAI_API_KEY not found in environment or .env file.")
-        elif provider.lower() == "ollama":
-            api_key = None  # Ollama may not require an API key
-        else:
-            raise ValueError(f"Unsupported provider: {provider}")
 
-    agent = SDLCFlexibleAgent(provider=provider, api_key=api_key, model=model, dry_run=dry_run)
-    prompt = "What is the capital of France?"
-    result = agent.run(prompt)
-    print("Agent result:", result)
+    try:
+        agent = SDLCFlexibleAgent(
+            provider=args.provider,
+            api_key=api_key,
+            model=args.model,
+            dry_run=args.dry_run,
+        )
+        result = agent.run(args.prompt, session_id=args.session_id)
+        print("Agent result:", result)
+    except (ValueError, RuntimeError) as e:
+        print(f"Error: {e}")
+
+if __name__ == "__main__":
+    import argparse
+    from dotenv import load_dotenv
+    main()

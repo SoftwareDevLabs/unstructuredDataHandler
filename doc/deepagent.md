@@ -1,56 +1,96 @@
-# DeepAgent usage
+# DeepAgent Usage
 
-This document describes `src/agents/deepagent.py` usage, required environment variables, and the safe dry-run mode.
+This document describes the usage of `src/agents/deepagent.py`, its configuration, and how to run and test it.
 
-Required environment variables (depending on provider):
+## Configuration
 
-- For Gemini/Google:
-  - `LLM_PROVIDER=gemini` or `LLM_PROVIDER=google`
-  - `GOOGLE_GEMINI_API_KEY` (must be provided via GitHub Secrets or local environment)
-  - Optional: `LLM_MODEL` (defaults to `chat-bison-001`)
+The `SDLCFlexibleAgent` is configured via the `config/model_config.yaml` file. This file allows you to set the default LLM provider, model, and agent settings.
 
-- For OpenAI:
-  - `LLM_PROVIDER=openai`
-  - `OPENAI_API_KEY` (must be provided via GitHub Secrets or local environment)
-  - Optional: `LLM_MODEL` (defaults to `gpt-3.5-turbo`)
+Here is an example of the configuration file:
+```yaml
+default_provider: gemini
+default_model: chat-bison-001
 
- - For Ollama (local server):
-   - `LLM_PROVIDER=ollama`
-   - Ensure a local Ollama server is running (default: `http://localhost:11434`)
+providers:
+  gemini:
+    default_model: chat-bison-001
+  openai:
+    default_model: gpt-3.5-turbo
+  ollama:
+    default_model: llama2
 
-Dry-run / CI-safe mode
-
-The module supports a `DRY_RUN=true` environment variable that prevents network calls and forces the agent to use the built-in `EchoTool` only. This makes unit tests and CI runs deterministic and offline-friendly.
-
-Example (dry run):
-
-```bash
-DRY_RUN=true LLM_PROVIDER=gemini python -c "import runpy; runpy.run_module('src.agents.deepagent', run_name='__main__')"
+agent:
+  type: ZERO_SHOT_REACT_DESCRIPTION
+  verbose: true
+  memory:
+    enabled: true
+    type: ConversationBufferMemory
 ```
 
-Tests
+You can override the default provider and model at runtime by passing the `--provider` and `--model` command-line arguments when running the agent.
 
-Unit tests mock `initialize_agent` to avoid any external requests. Run tests with:
+## Memory and Sessions
 
+The agent supports conversational memory. Each conversation is tracked by a session ID. You can provide a session ID when running the agent to maintain context across multiple turns.
+
+## Running the Agent
+
+You can run the agent from the command line using the `deepagent.py` script.
+
+**Command-line arguments:**
+- `--dry-run`: Run the agent in dry-run mode (no network calls).
+- `--provider`: The LLM provider to use (e.g., `gemini`, `openai`, `ollama`).
+- `--model`: The model name to use.
+- `--prompt`: The prompt to run.
+- `--session-id`: The session ID for the conversation.
+
+**Example:**
 ```bash
-PYTHONPATH=. python -m pytest -q
+python src/agents/deepagent.py --prompt "Hello, how are you?" --session-id "my-session"
 ```
 
-## Migration and CI notes
+## Testing the DeepAgent
 
-- Ollama can be used as a local LLM provider (good for on-prem or offline runs). However, for primary CI testing we prefer cloud providers (Gemini and OpenAI) because they are easier to run in CI and have stable HTTP APIs.
-- If you want to run the provider matrix in CI (which exercises real provider adapters), use the workflow dispatch input `run_providers=true` when triggering the `Python Tests (consolidated)` workflow.
-- For provider matrix runs you must provide credentials/secrets in the repository (for example `GOOGLE_GEMINI_API_KEY` and `OPENAI_API_KEY`). For private repos or to upload coverage, set `CODECOV_TOKEN` in the repository secrets.
-- Note: API keys were intentionally removed from the repository `.env` file. Provide keys via one of the following:
+### Unit Tests
 
-  - GitHub Secrets (recommended for CI): add `GOOGLE_GEMINI_API_KEY` and/or `OPENAI_API_KEY` in repository Settings → Secrets → Actions.
+Unit tests for the `deepagent` are located in `test/unit/test_deepagent.py` and `test/unit/test_deepagent_providers.py`. These tests use `pytest` and `monkeypatch` to test the agent's functionality in isolation, without making any network calls.
 
-  - Local environment (developer): export them in your shell:
+To run the unit tests, use the following command:
+```bash
+PYTHONPATH=. pytest test/unit/
+```
 
+### Integration Tests
+
+Integration tests for the LLM providers are located in `test/integration/llm/test_llm_api.py`. These tests are designed to be run against real LLM providers and require valid API keys.
+
+To run the integration tests, you will need to set up your API keys as described in the next section.
+
+## API Keys
+
+To use providers like Gemini and OpenAI, you need to provide API keys. There are several ways to do this:
+
+-   **GitHub Secrets (recommended for CI):** Add `GOOGLE_GEMINI_API_KEY` and/or `OPENAI_API_KEY` in your repository's `Settings` → `Secrets` → `Actions`.
+-   **Local environment variables:** Export the keys in your shell:
     ```bash
     export GOOGLE_GEMINI_API_KEY="your-gemini-key"
     export OPENAI_API_KEY="your-openai-key"
     ```
+-   **`.env` file:** Create a `.env` file in the root of the repository and add your API keys there. You can copy the `.env.template` file to get started.
+-   **`.env.local` file (development only):** For local development, you can create an untracked `.env.local` file and set your keys there. Do NOT commit this file to version control.
 
-  - Local dotenv (development only): create an untracked `.env.local` and set keys there; do NOT commit it.
-- Run the providers matrix manually from the Actions tab: select `Python Tests (consolidated)` → `Run workflow` → set `run_providers` to `true`.
+## Ollama Provider
+
+The `deepagent` supports the Ollama provider for running LLMs locally. To use it, you need to have an Ollama server running on your local machine (default: `http://localhost:11434`).
+
+You can run the agent with the Ollama provider like this:
+```bash
+python src/agents/deepagent.py --provider ollama --model llama2 --prompt "Why is the sky blue?"
+```
+
+## Migration and CI Notes
+
+-   Ollama can be used as a local LLM provider, which is great for on-premise or offline development. However, for CI testing, we prefer cloud providers like Gemini and OpenAI because they are easier to run in a CI environment and have stable HTTP APIs.
+-   If you want to run the provider matrix in CI, which exercises the real provider adapters, you can manually trigger the `Python Tests (consolidated)` workflow from the GitHub Actions tab and set the `run_providers` input to `true`.
+-   For provider matrix runs, you must provide API keys as GitHub Secrets. For private repos or to upload code coverage, you can also set the `CODECOV_TOKEN` secret.
+-   Run the providers matrix manually from the Actions tab: select `Python Tests (consolidated)` → `Run workflow` → set `run_providers` to `true`.

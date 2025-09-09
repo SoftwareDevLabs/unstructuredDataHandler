@@ -1,0 +1,45 @@
+permissions:
+  contents: read
+name: 'Prompt Evaluation'
+
+on:
+  workflow_dispatch:
+    inputs:
+      prompt_file:
+        description: 'Path to the prompt file (e.g., data/prompts/default.yaml)'
+        required: true
+        default: 'data/prompts/default.yaml'
+      provider:
+        description: 'LLM provider to use (gemini, openai, ollama)'
+        required: true
+        default: 'gemini'
+      model:
+        description: 'Model name to use'
+        required: false
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Python Environment
+        uses: ./.github/actions/setup-python-env
+        with:
+          python-version: '3.11'
+
+      - name: Run prompt evaluation
+        env:
+          GOOGLE_GEMINI_API_KEY: ${{ secrets.GOOGLE_GEMINI_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          PYTHONPATH: .
+        run: |
+          python scripts/evaluate-prompt.py \
+            --prompt-file ${{ github.event.inputs.prompt_file }} \
+            --provider ${{ github.event.inputs.provider }} \
+            --model ${{ github.event.inputs.model }} \
+            --output-file prompt-output.txt
+
+      - name: Upload prompt output
+        uses: actions/upload-artifact@v4
+        with:
+          name: prompt-output-${{ github.event.inputs.provider }}-${{ github.event.inputs.model || 'default' }}
+          path: prompt-output.txt
