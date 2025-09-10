@@ -289,3 +289,7 @@ profiles.json
 # MSBuildCache
 /MSBuildCacheLogs/
 *.DS_Store
+
+# Coverage reports
+.coverage
+coverage.xml

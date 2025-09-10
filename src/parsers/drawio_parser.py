@@ -234,22 +234,26 @@ class DrawIOParser(BaseParser):
     
     def _determine_relationship_type(self, style: str, value: str) -> str:
         """Determine relationship type based on style and content."""
-        style_lower = style.lower()
-        value_lower = value.lower() if value else ''
+        style_props = self._parse_style(style)
+        value_lower = value.lower() if value else ""
+
+        end_arrow = style_props.get("endArrow")
+        end_fill = style_props.get("endFill")
+
+        if end_arrow == "block" and end_fill == "0":
+            return "inheritance"
+        if end_arrow == "diamond" and end_fill == "1":
+            return "composition"
+        if end_arrow == "diamond" and end_fill == "0":
+            return "aggregation"
+        if style_props.get("dashed") == "1":
+            return "dependency"
+        if "extends" in value_lower:
+            return "inheritance"
+        if "implements" in value_lower:
+            return "realization"
         
-        # Check arrow types and line styles
-        if 'inheritance' in style_lower or 'extends' in value_lower:
-            return 'inheritance'
-        elif 'composition' in style_lower or 'filled' in style_lower:
-            return 'composition'
-        elif 'aggregation' in style_lower:
-            return 'aggregation'
-        elif 'dashed' in style_lower or 'dotted' in style_lower:
-            return 'dependency'
-        elif 'implements' in value_lower:
-            return 'realization'
-        else:
-            return 'association'
+        return "association"
     
     def _parse_style(self, style: str) -> Dict[str, str]:
         """Parse DrawIO style string into properties."""

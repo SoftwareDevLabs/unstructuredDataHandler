@@ -1,6 +1,7 @@
 """LangChain agent integration using OpenAI LLM and standard tools."""
 
 import os
+import re
 import yaml
 from typing import Any, Optional, List
 
@@ -80,7 +81,7 @@ class SDLCFlexibleAgent:
 
         if self.dry_run:
             self.tools = tools or [EchoTool()]
-            self.agent = MockAgent()
+            self.agent = MockAgent(tools=self.tools)
             return
 
         # Configure agent from YAML
@@ -141,13 +142,24 @@ class SDLCFlexibleAgent:
 
 
 class MockAgent:
-    """A trivial agent used for dry-run and CI that only echoes input."""
-    def __init__(self):
+    """A mock agent for dry-run and CI that can echo or use tools."""
+    def __init__(self, tools: Optional[List[BaseTool]] = None):
         self.last_input = None
+        self.tools = tools or []
 
-    def invoke(self, input_dict: dict, config: dict):
-    def invoke(self, input: dict, config: dict):
-        self.last_input = input["input"]
+    def invoke(self, input_data: dict, config: dict):
+        self.last_input = input_data["input"]
+
+        # Simple logic to simulate tool use for testing
+        if "parse" in self.last_input.lower():
+            for tool in self.tools:
+                if tool.name == "DiagramParserTool":
+                    # Extract file path from prompt (simple parsing)
+                    match = re.search(r"\'(.*?)\'", self.last_input)
+                    if match:
+                        file_path = match.group(1)
+                        return {"output": tool._run(file_path)}
+
         return {"output": f"dry-run-echo:{self.last_input}"}
 
 
@@ -183,7 +195,8 @@ def main():
     except (ValueError, RuntimeError) as e:
         print(f"Error: {e}")
 
+import argparse
+from dotenv import load_dotenv
+
 if __name__ == "__main__":
-    import argparse
-    from dotenv import load_dotenv
     main()

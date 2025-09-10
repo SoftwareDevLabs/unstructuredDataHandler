@@ -346,5 +346,7 @@ class DiagramDatabase:
     def delete_diagram(self, diagram_id: int) -> bool:
         """Delete a diagram and all its related records."""
         with sqlite3.connect(self.db_path) as conn:
+            conn.execute("PRAGMA foreign_keys = ON")
             cursor = conn.execute('DELETE FROM diagrams WHERE id = ?', (diagram_id,))
+            conn.commit()
             return cursor.rowcount > 0
