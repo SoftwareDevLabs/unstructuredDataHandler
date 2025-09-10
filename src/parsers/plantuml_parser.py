@@ -204,7 +204,7 @@ class PlantUMLParser(BaseParser):
             # Association: A -- B, A --> B
             (r'(\w+)\s*-->\s*(\w+)', 'association', 'normal'),
             (r'(\w+)\s*<--\s*(\w+)', 'association', 'reverse'),
-            (r'\b(?!o|O|\*)\w+\b\s*--\s*\b\w+\b', 'association', 'normal'),
+            (r'(\w+)\s*(?<!o)(?<!\*)--\s*(\w+)', 'association', 'normal'),
             
             # Dependency: A ..> B, A <.. B
             (r'(\w+)\s*\.\.>\s*(\w+)', 'dependency', 'normal'),
