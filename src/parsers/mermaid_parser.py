@@ -286,7 +286,7 @@ class MermaidParser(BaseParser):
             message_patterns = [
                 (r'(\w+)\s*->>\s*(\w+)\s*:\s*(.+)', 'async_message'),
                 (r'(\w+)\s*->\s*(\w+)\s*:\s*(.+)', 'sync_message'),
-                (r'(\w+)\s*-->>\s*(\w+)\s*:\s*(.+)', 'return_message'),
+                (r'(\w+)\s*-->\s*(\w+)\s*:\s*(.+)', 'return_message'),
             ]
             
             for pattern, msg_type in message_patterns:
