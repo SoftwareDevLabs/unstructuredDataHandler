@@ -1,5 +1,5 @@
 Traceback (most recent call last):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/inference_tip.py", line 33, in _inference_tip_cached
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/inference_tip.py", line 33, in _inference_tip_cached
     result = _cache[func, node]
              ~~~~~~^^^^^^^^^^^^
 KeyError: (<function infer_typing_attr at 0x75c199c2e0c0>, <Subscript l.108 at 0x75c19904aed0>)
@@ -7,277 +7,277 @@ KeyError: (<function infer_typing_attr at 0x75c199c2e0c0>, <Subscript l.108 at 0
 During handling of the above exception, another exception occurred:
 
 Traceback (most recent call last):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/pylint/lint/pylinter.py", line 1044, in get_ast
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/pylint/lint/pylinter.py", line 1044, in get_ast
     return MANAGER.ast_from_file(filepath, modname, source=True)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/manager.py", line 138, in ast_from_file
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/manager.py", line 138, in ast_from_file
     return AstroidBuilder(self).file_build(filepath, modname)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/builder.py", line 145, in file_build
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/builder.py", line 145, in file_build
     return self._post_build(module, builder, encoding)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/builder.py", line 173, in _post_build
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/builder.py", line 173, in _post_build
     module = self._manager.visit_transforms(module)
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/manager.py", line 109, in visit_transforms
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/manager.py", line 109, in visit_transforms
     return self._transform.visit(node)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 89, in visit
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 89, in visit
     return self._visit(module)
            ^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 54, in _visit
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 54, in _visit
     visited = self._visit_generic(value)
               ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 61, in _visit_generic
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 61, in _visit_generic
     return [self._visit_generic(child) for child in node]
             ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 67, in _visit_generic
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 67, in _visit_generic
     return self._visit(node)
            ^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 57, in _visit
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 57, in _visit
     return self._transform(node)
            ^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 38, in _transform
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 38, in _transform
     if predicate is None or predicate(node):
                             ^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/brain/brain_namedtuple_enum.py", line 600, in _is_enum_subclass
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/brain/brain_namedtuple_enum.py", line 600, in _is_enum_subclass
     return cls.is_subtype_of("enum.Enum")
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/nodes/scoped_nodes/scoped_nodes.py", line 2238, in is_subtype_of
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/nodes/scoped_nodes/scoped_nodes.py", line 2238, in is_subtype_of
     return any(anc.qname() == type_name for anc in self.ancestors(context=context))
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/nodes/scoped_nodes/scoped_nodes.py", line 2238, in <genexpr>
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/nodes/scoped_nodes/scoped_nodes.py", line 2238, in <genexpr>
     return any(anc.qname() == type_name for anc in self.ancestors(context=context))
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/nodes/scoped_nodes/scoped_nodes.py", line 2399, in ancestors
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/nodes/scoped_nodes/scoped_nodes.py", line 2399, in ancestors
     for baseobj in stmt.infer(context):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/nodes/node_ng.py", line 184, in infer
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/nodes/node_ng.py", line 184, in infer
     for i, result in enumerate(self._infer(context=context, **kwargs)):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 143, in raise_if_nothing_inferred
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 143, in raise_if_nothing_inferred
     yield next(generator)
           ^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 112, in wrapped
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 112, in wrapped
     for res in _func(node, context, **kwargs):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/bases.py", line 177, in _infer_stmts
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/bases.py", line 177, in _infer_stmts
     for inf in stmt.infer(context=context):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/nodes/node_ng.py", line 184, in infer
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/nodes/node_ng.py", line 184, in infer
     for i, result in enumerate(self._infer(context=context, **kwargs)):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 143, in raise_if_nothing_inferred
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 143, in raise_if_nothing_inferred
     yield next(generator)
           ^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 112, in wrapped
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 112, in wrapped
     for res in _func(node, context, **kwargs):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/bases.py", line 177, in _infer_stmts
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/bases.py", line 177, in _infer_stmts
     for inf in stmt.infer(context=context):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/nodes/node_ng.py", line 184, in infer
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/nodes/node_ng.py", line 184, in infer
     for i, result in enumerate(self._infer(context=context, **kwargs)):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 143, in raise_if_nothing_inferred
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 143, in raise_if_nothing_inferred
     yield next(generator)
           ^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 112, in wrapped
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 112, in wrapped
     for res in _func(node, context, **kwargs):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/bases.py", line 177, in _infer_stmts
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/bases.py", line 177, in _infer_stmts
     for inf in stmt.infer(context=context):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/nodes/node_ng.py", line 184, in infer
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/nodes/node_ng.py", line 184, in infer
     for i, result in enumerate(self._infer(context=context, **kwargs)):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 143, in raise_if_nothing_inferred
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 143, in raise_if_nothing_inferred
     yield next(generator)
           ^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 112, in wrapped
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 112, in wrapped
     for res in _func(node, context, **kwargs):
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/inference.py", line 334, in infer_import_from
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/inference.py", line 334, in infer_import_from
     module = self.do_import_module()
              ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/nodes/_base_nodes.py", line 146, in do_import_module
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/nodes/_base_nodes.py", line 146, in do_import_module
     return mymodule.import_module(
            ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/nodes/scoped_nodes/scoped_nodes.py", line 530, in import_module
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/nodes/scoped_nodes/scoped_nodes.py", line 530, in import_module
     return AstroidManager().ast_from_module_name(
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/manager.py", line 246, in ast_from_module_name
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/manager.py", line 246, in ast_from_module_name
     return self.ast_from_file(found_spec.location, modname, fallback=False)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/manager.py", line 138, in ast_from_file
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/manager.py", line 138, in ast_from_file
     return AstroidBuilder(self).file_build(filepath, modname)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/builder.py", line 145, in file_build
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/builder.py", line 145, in file_build
     return self._post_build(module, builder, encoding)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/builder.py", line 173, in _post_build
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/builder.py", line 173, in _post_build
     module = self._manager.visit_transforms(module)
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/manager.py", line 109, in visit_transforms
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/manager.py", line 109, in visit_transforms
     return self._transform.visit(node)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 89, in visit
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 89, in visit
     return self._visit(module)
            ^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 54, in _visit
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 54, in _visit
     visited = self._visit_generic(value)
               ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 61, in _visit_generic
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 61, in _visit_generic
     return [self._visit_generic(child) for child in node]
             ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 67, in _visit_generic
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 67, in _visit_generic
     return self._visit(node)
            ^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 57, in _visit
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 57, in _visit
     return self._transform(node)
            ^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 38, in _transform
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 38, in _transform
     if predicate is None or predicate(node):
                             ^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/brain/brain_namedtuple_enum.py", line 600, in _is_enum_subclass
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/brain/brain_namedtuple_enum.py", line 600, in _is_enum_subclass
     return cls.is_subtype_of("enum.Enum")
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/nodes/scoped_nodes/scoped_nodes.py", line 2238, in is_subtype_of
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/nodes/scoped_nodes/scoped_nodes.py", line 2238, in is_subtype_of
     return any(anc.qname() == type_name for anc in self.ancestors(context=context))
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/nodes/scoped_nodes/scoped_nodes.py", line 2238, in <genexpr>
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/nodes/scoped_nodes/scoped_nodes.py", line 2238, in <genexpr>
     return any(anc.qname() == type_name for anc in self.ancestors(context=context))
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/nodes/scoped_nodes/scoped_nodes.py", line 2399, in ancestors
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/nodes/scoped_nodes/scoped_nodes.py", line 2399, in ancestors
     for baseobj in stmt.infer(context):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/nodes/node_ng.py", line 184, in infer
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/nodes/node_ng.py", line 184, in infer
     for i, result in enumerate(self._infer(context=context, **kwargs)):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 143, in raise_if_nothing_inferred
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 143, in raise_if_nothing_inferred
     yield next(generator)
           ^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 112, in wrapped
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 112, in wrapped
     for res in _func(node, context, **kwargs):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/inference.py", line 431, in infer_subscript
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/inference.py", line 431, in infer_subscript
     for value in self.value.infer(context):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/nodes/node_ng.py", line 184, in infer
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/nodes/node_ng.py", line 184, in infer
     for i, result in enumerate(self._infer(context=context, **kwargs)):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 143, in raise_if_nothing_inferred
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 143, in raise_if_nothing_inferred
     yield next(generator)
           ^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 112, in wrapped
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 112, in wrapped
     for res in _func(node, context, **kwargs):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/bases.py", line 177, in _infer_stmts
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/bases.py", line 177, in _infer_stmts
     for inf in stmt.infer(context=context):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/nodes/node_ng.py", line 184, in infer
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/nodes/node_ng.py", line 184, in infer
     for i, result in enumerate(self._infer(context=context, **kwargs)):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 143, in raise_if_nothing_inferred
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 143, in raise_if_nothing_inferred
     yield next(generator)
           ^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 112, in wrapped
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 112, in wrapped
     for res in _func(node, context, **kwargs):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/bases.py", line 177, in _infer_stmts
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/bases.py", line 177, in _infer_stmts
     for inf in stmt.infer(context=context):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/nodes/node_ng.py", line 184, in infer
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/nodes/node_ng.py", line 184, in infer
     for i, result in enumerate(self._infer(context=context, **kwargs)):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 143, in raise_if_nothing_inferred
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 143, in raise_if_nothing_inferred
     yield next(generator)
           ^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 112, in wrapped
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 112, in wrapped
     for res in _func(node, context, **kwargs):
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/inference.py", line 334, in infer_import_from
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/inference.py", line 334, in infer_import_from
     module = self.do_import_module()
              ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/nodes/_base_nodes.py", line 146, in do_import_module
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/nodes/_base_nodes.py", line 146, in do_import_module
     return mymodule.import_module(
            ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/nodes/scoped_nodes/scoped_nodes.py", line 530, in import_module
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/nodes/scoped_nodes/scoped_nodes.py", line 530, in import_module
     return AstroidManager().ast_from_module_name(
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/manager.py", line 246, in ast_from_module_name
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/manager.py", line 246, in ast_from_module_name
     return self.ast_from_file(found_spec.location, modname, fallback=False)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/manager.py", line 138, in ast_from_file
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/manager.py", line 138, in ast_from_file
     return AstroidBuilder(self).file_build(filepath, modname)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/builder.py", line 145, in file_build
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/builder.py", line 145, in file_build
     return self._post_build(module, builder, encoding)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/builder.py", line 173, in _post_build
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/builder.py", line 173, in _post_build
     module = self._manager.visit_transforms(module)
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/manager.py", line 109, in visit_transforms
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/manager.py", line 109, in visit_transforms
     return self._transform.visit(node)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 89, in visit
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 89, in visit
     return self._visit(module)
            ^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 54, in _visit
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 54, in _visit
     visited = self._visit_generic(value)
               ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 61, in _visit_generic
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 61, in _visit_generic
     return [self._visit_generic(child) for child in node]
             ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 67, in _visit_generic
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 67, in _visit_generic
     return self._visit(node)
            ^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 57, in _visit
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 57, in _visit
     return self._transform(node)
            ^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 38, in _transform
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/transforms.py", line 38, in _transform
     if predicate is None or predicate(node):
                             ^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/brain/brain_namedtuple_enum.py", line 600, in _is_enum_subclass
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/brain/brain_namedtuple_enum.py", line 600, in _is_enum_subclass
     return cls.is_subtype_of("enum.Enum")
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/nodes/scoped_nodes/scoped_nodes.py", line 2238, in is_subtype_of
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/nodes/scoped_nodes/scoped_nodes.py", line 2238, in is_subtype_of
     return any(anc.qname() == type_name for anc in self.ancestors(context=context))
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/nodes/scoped_nodes/scoped_nodes.py", line 2238, in <genexpr>
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/nodes/scoped_nodes/scoped_nodes.py", line 2238, in <genexpr>
     return any(anc.qname() == type_name for anc in self.ancestors(context=context))
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/nodes/scoped_nodes/scoped_nodes.py", line 2399, in ancestors
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/nodes/scoped_nodes/scoped_nodes.py", line 2399, in ancestors
     for baseobj in stmt.infer(context):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/nodes/node_ng.py", line 161, in infer
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/nodes/node_ng.py", line 161, in infer
     results = list(self._explicit_inference(self, context, **kwargs))
                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/inference_tip.py", line 40, in _inference_tip_cached
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/inference_tip.py", line 40, in _inference_tip_cached
     result = _cache[func, node] = list(func(*args, **kwargs))
                                        ^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/brain/brain_typing.py", line 166, in infer_typing_attr
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/brain/brain_typing.py", line 166, in infer_typing_attr
     value = next(node.value.infer())  # type: ignore[union-attr] # value shouldn't be None for Subscript.
             ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/nodes/node_ng.py", line 171, in infer
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/nodes/node_ng.py", line 171, in infer
     yield from self._infer(context=context, **kwargs)
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 143, in raise_if_nothing_inferred
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 143, in raise_if_nothing_inferred
     yield next(generator)
           ^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 112, in wrapped
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 112, in wrapped
     for res in _func(node, context, **kwargs):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/bases.py", line 177, in _infer_stmts
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/bases.py", line 177, in _infer_stmts
     for inf in stmt.infer(context=context):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/nodes/node_ng.py", line 184, in infer
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/nodes/node_ng.py", line 184, in infer
     for i, result in enumerate(self._infer(context=context, **kwargs)):
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 143, in raise_if_nothing_inferred
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 143, in raise_if_nothing_inferred
     yield next(generator)
           ^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 112, in wrapped
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/decorators.py", line 112, in wrapped
     for res in _func(node, context, **kwargs):
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/inference.py", line 334, in infer_import_from
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/inference.py", line 334, in infer_import_from
     module = self.do_import_module()
              ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/nodes/_base_nodes.py", line 146, in do_import_module
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/nodes/_base_nodes.py", line 146, in do_import_module
     return mymodule.import_module(
            ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/nodes/scoped_nodes/scoped_nodes.py", line 530, in import_module
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/nodes/scoped_nodes/scoped_nodes.py", line 530, in import_module
     return AstroidManager().ast_from_module_name(
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/manager.py", line 246, in ast_from_module_name
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/manager.py", line 246, in ast_from_module_name
     return self.ast_from_file(found_spec.location, modname, fallback=False)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/manager.py", line 138, in ast_from_file
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/manager.py", line 138, in ast_from_file
     return AstroidBuilder(self).file_build(filepath, modname)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/builder.py", line 144, in file_build
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/builder.py", line 144, in file_build
     module, builder = self._data_build(data, modname, path)
                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/builder.py", line 204, in _data_build
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/builder.py", line 204, in _data_build
     module = builder.visit_module(node, modname, node_file, package)
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/rebuilder.py", line 254, in visit_module
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/rebuilder.py", line 254, in visit_module
     [self.visit(child, newnode) for child in node.body],
      ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/SDLC_core/.venv_ci/lib/python3.12/site-packages/astroid/rebuilder.py", line 609, in visit
+  File "/workspaces/unstructuredDataHandler/.venv_ci/lib/python3.12/site-packages/astroid/rebuilder.py", line 609, in visit
     visit_method = getattr(self, visit_name)
                    ^^^^^^^^^^^^^^^^^^^^^^^^^
 AttributeError: 'TreeRebuilder' object has no attribute 'visit_typealias'
