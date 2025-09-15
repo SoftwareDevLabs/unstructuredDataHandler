@@ -1,8 +1,8 @@
-# Copilot Instructions for SDLC_core
+# Copilot Instructions for unstructuredDataHandler
 
 ## Repository Summary
 
-SDLC_core is a Python-based Software Development Life Cycle core project that provides AI/ML capabilities for software development workflows. The repository contains modules for LLM clients, intelligent agents, memory management, prompt engineering, document retrieval, skill execution, and various utilities. It combines Python core functionality with TypeScript Azure DevOps pipeline configurations.
+unstructuredDataHandler is a Python-based Software Development Life Cycle core project that provides AI/ML capabilities for software development workflows. The repository contains modules for LLM clients, intelligent agents, memory management, prompt engineering, document retrieval, skill execution, and various utilities. It combines Python core functionality with TypeScript Azure DevOps pipeline configurations.
 
 **Repository Size**: ~25 directories, mixed Python/TypeScript codebase  
 **Primary Language**: Python 3.10-3.12  
@@ -14,11 +14,20 @@ SDLC_core is a Python-based Software Development Life Cycle core project that pr
 
 ### Prerequisites
 
-**CRITICAL**: Always run dependency installation before any build or test operations:
+Preferred: use the reproducible venv workflow via the test script. This creates and reuses `.venv_ci` under the repo root.
 
 ```bash
-# Install testing and analysis dependencies (requirements.txt is empty)
-pip install pytest pytest-cov mypy pylint
+# Runs tests in an isolated venv (.venv_ci) and pins pytest
+./scripts/run-tests.sh
+```
+
+Alternative (local dev): create your own virtualenv and install dev dependencies.
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -U pip
+pip install -r requirements-dev.txt
 ```
 
 ### Environment Setup
@@ -33,29 +42,27 @@ python --version
 
 ### Build Steps
 
-1. **Bootstrap** - No specific bootstrap required, Python-based project
-2. **Dependencies** - Manual installation required (empty requirements.txt):
-   ```bash
-   pip install pytest pytest-cov mypy pylint
-   ```
-3. **Build** - No compilation step needed for Python modules
-4. **Validate** - Run linting and static analysis
+1. Bootstrap - No special bootstrap required (Python project)
+2. Dependencies - Prefer the isolated venv script (`./scripts/run-tests.sh`) or install from `requirements-dev.txt` in a local venv
+3. Build - No compilation step
+4. Validate - Run tests, lint, and type checks as below
 
 ### Testing
 
-**CURRENT STATE**: Test infrastructure is set up with template files. All commands run cleanly.
+Preferred (isolated venv):
 
 ```bash
-# Test framework validation (will show "no tests ran" for empty template files)
+./scripts/run-tests.sh                      # Full test run
+./scripts/run-tests.sh test/unit -k deepagent  # Narrow selection
+```
+
+Alternative (local venv):
+
+```bash
 PYTHONPATH=. python -m pytest test/ -v
-
-# Run tests with coverage (when actual tests exist)
-PYTHONPATH=. python -m pytest test/ --cov=src/ --cov-report=xml
-
-# Run specific test types (currently empty template structure)
-PYTHONPATH=. python -m pytest test/unit/ -v        # Unit tests
-PYTHONPATH=. python -m pytest test/integration/ -v # Integration tests  
-PYTHONPATH=. python -m pytest test/e2e/ -v        # End-to-end tests
+PYTHONPATH=. python -m pytest test/unit/ -v
+PYTHONPATH=. python -m pytest test/integration/ -v
+PYTHONPATH=. python -m pytest test/e2e/ -v
 ```
 
 **Test Structure** (template-ready):
@@ -156,10 +163,10 @@ doc/ → Project documentation:
 
 ### Key Dependencies and Architecture Notes
 
-**Python Module Dependencies** (install manually):
-- `pytest`, `pytest-cov` - Testing framework
-- `mypy` - Static type checking  
-- `pylint` - Code quality analysis
+**Python Module Dependencies**:
+- For local dev: install from `requirements-dev.txt`
+- The reproducible test script installs pinned `pytest` into `.venv_ci`
+- Tools commonly used: `pytest`, `pytest-cov`, `mypy`, `pylint`, `ruff`
 
 **Branch Strategy** (from doc/submitting_code.md):
 - `dev/main` - Primary development branch
@@ -194,9 +201,9 @@ setup.py              → Python package setup (currently empty)
 
 **ALWAYS do the following before making changes:**
 
-1. **Install dependencies**: `pip install pytest pytest-cov mypy pylint`
+1. **Set up environment**: Prefer `./scripts/run-tests.sh` (creates `.venv_ci`) or create a local venv and `pip install -r requirements-dev.txt`
 2. **Set Python path**: `export PYTHONPATH=.` or prefix commands with `PYTHONPATH=.`
-3. **Test before changing**: `PYTHONPATH=. python -m pytest test/ -v` to validate current state
+3. **Test before changing**: `./scripts/run-tests.sh` or `PYTHONPATH=. python -m pytest test/ -v`
 4. **Configure the agent**: Edit `config/model_config.yaml` to configure the agent before running it.
 5. **Check module imports**: Ensure new Python modules have proper `__init__.py` files
 6. **Follow branch naming**: Use `dev/<alias>/<feature>` pattern for feature branches
@@ -215,4 +222,4 @@ setup.py              → Python package setup (currently empty)
 - Consider impact on LLM client routing and fallback logic
 - Verify no naming conflicts with existing modules
 
-**Trust these instructions** - only search for additional information if these instructions are incomplete or found to be incorrect. The empty requirements.txt and specific PYTHONPATH requirements are documented limitations that require manual handling.
+**Trust these instructions** - only search for additional information if these instructions are incomplete or found to be incorrect. Note: `requirements.txt` may be empty by design; use `requirements-dev.txt` for local development.

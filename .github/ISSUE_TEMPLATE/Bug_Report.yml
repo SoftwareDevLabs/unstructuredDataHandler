@@ -6,16 +6,16 @@ body:
 - type: markdown
   attributes:
     value: |
-      Please make sure to [search for existing issues](https://github.com/SoftwareDevLabs/SDLC_core/issues) and [check the FAQ](https://github.com/SoftwareDevLabs/SDLC_core/wiki/Frequently-Asked-Questions-(FAQ)) before filing a new one!
+      Please make sure to [search for existing issues](https://github.com/SoftwareDevLabs/unstructuredDataHandler/issues) and [check the FAQ](https://github.com/SoftwareDevLabs/unstructuredDataHandler/wiki/Frequently-Asked-Questions-(FAQ)) before filing a new one!
 
       If this is an application crash, please also provide a [Feedback Hub](mailto:info@softwaredevlabs.com) submission link so we can find your diagnostic data on the backend.
 
 - type: input
   attributes:
-    label: SDLC_core Version
+    label: unstructuredDataHandler Version
     placeholder: "1.21.2701.0"
     description: |
-      Please provide the current version of the SDLC_core.
+      Please provide the current version of the unstructuredDataHandler.
   validations:
     required: false
     

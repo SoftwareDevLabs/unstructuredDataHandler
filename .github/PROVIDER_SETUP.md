@@ -53,7 +53,7 @@ If you prefer to run a single provider smoke job manually (quick check) use the 
 
 ```bash
 # Dry-run locally (no network calls) — uses gemini by default in examples
-DRY_RUN=true LLM_PROVIDER=gemini python -c "from src.agents import deepagent; a=deepagent.SDLCFlexibleAgent(provider='gemini', dry_run=True); print('dry run ok', a.agent.run('hello'))"
+DRY_RUN=true LLM_PROVIDER=gemini python -c "from src.agents import deepagent; a=deepagent.FlexibleAgent(provider='gemini', dry_run=True); print('dry run ok', a.agent.run('hello'))"
 ```
 
 Security
