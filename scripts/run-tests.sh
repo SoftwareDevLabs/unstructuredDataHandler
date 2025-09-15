@@ -15,6 +15,6 @@ fi
 
 "$VENV_DIR/bin/python" -m pip install --upgrade pip setuptools wheel
 "$VENV_DIR/bin/python" -m pip install -r "$ROOT_DIR/requirements.txt"
-"$VENV_DIR/bin/python" -m pip install pytest==8.4.1
+"$VENV_DIR/bin/python" -m pip install pytest==8.4.1 pytest-cov==5.0.0
 
 PYTHONPATH="$ROOT_DIR" "$VENV_DIR/bin/python" -m pytest "$@"

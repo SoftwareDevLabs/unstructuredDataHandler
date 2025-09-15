@@ -2,25 +2,25 @@
 
 > **NOTE**
 >
-> This document roadmap for SDLC_core.
+> This document roadmap for unstructuredDataHandler.
 
 ## Overview
 
-This document outlines the roadmap towards delivering SDLC_core.
+This document outlines the roadmap towards delivering unstructuredDataHandler.
 
-## SDLC_core Milestones
+## unstructuredDataHandler Milestones
 
-SDLC_core is engineered and delivered as a set of 6-week milestones.
+unstructuredDataHandler is engineered and delivered as a set of 6-week milestones.
 
-## SDLC_core Roadmap / Timeline
+## unstructuredDataHandler Roadmap / Timeline
 
 Below is the schedule for when milestones will be included in release builds of Windows Terminal and Windows Terminal Preview. The dates are rough estimates and are subject to change.
 
 | Milestone End Date | Milestone Name | Preview Release |
 | ------------------ | -------------- | ------------------------- |
-| 202x-xx-xx | [X.Y] in SDLC_core | [Release 1](add link to release) |
-| 202x-xx-xx | [X.Y] in SDLC_core | [Release 2](add link to release) |
-| 202x-xx-xx | [X.Y] in SDLC_core | [Release x](add link to release) |
+| 202x-xx-xx | [X.Y] in unstructuredDataHandler | [Release 1](add link to release) |
+| 202x-xx-xx | [X.Y] in unstructuredDataHandler | [Release 2](add link to release) |
+| 202x-xx-xx | [X.Y] in unstructuredDataHandler | [Release x](add link to release) |
 
 ## Issue Triage & Prioritization
 
@@ -32,7 +32,7 @@ Incoming issues/asks/etc. are triaged several times a week, labeled appropriatel
 
 ## 2.0 Scenarios
 
-The following are a list of the key scenarios we're aiming to deliver for SDLC_core.
+The following are a list of the key scenarios we're aiming to deliver for unstructuredDataHandler.
 
 > 👉 Note: There are many other features that don't fit the current versio, but will be re-assessed and prioritized for next verison, the plan for which will be published in 2021.
 
@@ -56,5 +56,5 @@ Feature Notes:
 2. Optional / Stretch-goal <br/>
 
 
-[SDLC_core Roadmap]: ./roadmap-20xx.md
+[unstructuredDataHandler Roadmap]: ./roadmap-20xx.md
 

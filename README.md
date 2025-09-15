@@ -1,13 +1,13 @@
 
 
-# Welcome to the SDLC_core Repo
+# Welcome to the unstructuredDataHandler Repo
 
 <details>
   <summary><strong>Table of Contents</strong></summary>
 
 - [Installing and running Windows Terminal](#installing-and-running-windows-terminal)
-- [Module Roadmap](#SDLC_core-roadmap)
-- [SDLC_core Overview](#sdlc_core-overview)
+- [Module Roadmap](#unstructureddatahandler-roadmap)
+- [unstructuredDataHandler Overview](#unstructureddatahandler-overview)
 - [Resources](#resources)
 - [FAQ](#faq)
 - [Documentation](#documentation)
@@ -20,15 +20,15 @@
 
 <br />
 
-This repository contains the source code for the SDLC_core project, a Python-based framework for building AI-powered software development life cycle tools.
+This repository contains the source code for the unstructuredDataHandler project, a Python-based framework for building AI-powered software development life cycle tools.
 
 Related repositories include:
 
-* [SDLC_core Documentation](https://github.com/SoftwareDevLabs) (Placeholder)
+* [unstructuredDataHandler Documentation][docs-repo] (Placeholder)
 
-## SDLC_core Roadmap
+## unstructuredDataHandler Roadmap
 
-The plan for the SDLC_core [is described here](./doc/roadmap-20xx.md) and
+The plan for the unstructuredDataHandler [is described here](./doc/roadmap-20xx.md) and
 will be updated as the project proceeds.
 
 ## Installing and running Windows Terminal
@@ -36,9 +36,9 @@ will be updated as the project proceeds.
 > [!NOTE]
 > This section is a placeholder and may not be relevant to this project.
 
-## SDLC_core Overview
+## unstructuredDataHandler Overview
 
-SDLC_core is a Python-based Software Development Life Cycle core project that provides AI/ML capabilities for software development workflows. The repository contains modules for LLM clients, intelligent agents, memory management, prompt engineering, document retrieval, skill execution, and various utilities. It combines a Python core with TypeScript for Azure DevOps pipeline configurations.
+unstructuredDataHandler is a Python-based Software Development Life Cycle core project that provides AI/ML capabilities for software development workflows. The repository contains modules for LLM clients, intelligent agents, memory management, prompt engineering, document retrieval, skill execution, and various utilities. It combines a Python core with TypeScript for Azure DevOps pipeline configurations.
 
 ## Resources
 
@@ -59,8 +59,8 @@ SDLC_core is a Python-based Software Development Life Cycle core project that pr
 ## Documentation
 
 All project documentation is located at [softwaremodule-docs](./doc/). If you would like
-to contribute to the documentation, please submit a pull request on the [SDLC_core
-Documentation](https://github.com/SoftwareDevLabs) repository.
+to contribute to the documentation, please submit a pull request on the [unstructuredDataHandler
+Documentation][docs-repo] repository.
 
 ---
 
@@ -82,7 +82,7 @@ Documentation](https://github.com/SoftwareDevLabs) repository.
 
 ### Agents
 
-The `agents` module provides the core components for creating AI agents. It includes a flexible `SDLCFlexibleAgent` that can be configured to use different LLM providers (like OpenAI, Gemini, and Ollama) and a set of tools. The module is designed to be extensible, allowing for the creation of custom agents with specialized skills. Key components include a planner and an executor (currently placeholders for future development) and a `MockAgent` for testing and CI.
+The `agents` module provides the core components for creating AI agents. It includes a flexible `FlexibleAgent` (formerly `SDLCFlexibleAgent`) that can be configured to use different LLM providers (like OpenAI, Gemini, and Ollama) and a set of tools. The module is designed to be extensible, allowing for the creation of custom agents with specialized skills. Key components include a planner and an executor (currently placeholders for future development) and a `MockAgent` for testing and CI.
 
 ### Parsers
 
@@ -159,7 +159,47 @@ You can also use the Makefile targets:
 ```bash
 make test
 make lint
+make typecheck
+make format
+make coverage       # terminal coverage summary
+make coverage-html  # generate HTML report in ./htmlcov/
+make ci             # tests with coverage + ruff + mypy + pylint
 ```
+
+### How to test locally (two options)
+
+- Preferred (isolated venv): Use `./scripts/run-tests.sh`. It creates `.venv_ci`, pins pytest, and runs with `PYTHONPATH` set correctly.
+- Alternative (your own venv):
+  1. `python3 -m venv .venv`
+  2. `source .venv/bin/activate`
+  3. `pip install -U pip`
+  4. `pip install -r requirements-dev.txt`
+  5. `PYTHONPATH=. python -m pytest test/ -v`
+
+### Optional: run with coverage
+
+- Isolated venv script (add flags after the script path):
+  - `./scripts/run-tests.sh --cov=src --cov-report=term-missing`
+- Local venv (after installing `requirements-dev.txt`):
+  - `PYTHONPATH=. python -m pytest test/ --cov=src --cov-report=term-missing`
+
+Makefile shortcuts:
+
+- `make coverage` — terminal summary
+- `make coverage-html` — generates an HTML report in `./htmlcov/`
+
+### Quick lint and type checks
+
+- Makefile shortcut:
+  - `make lint`
+  - `make lint-fix`   # ruff check with autofix
+  - `make typecheck`  # mypy with router exclusion
+  - `make format`     # ruff formatter
+- Manual (useful in CI or local venv):
+  - `python -m pylint src/ --exit-zero`
+  - `python -m mypy src/ --ignore-missing-imports --exclude="src/llm/router.py"`
+
+Note: The mypy exclusion for `src/llm/router.py` avoids a duplicate module conflict with `src/fallback/router.py` during type analysis.
 
 ---
 
@@ -169,6 +209,20 @@ We are excited to work with the community to build and enhance this project.
 
 ***BEFORE you start work on a feature/fix***, please read & follow our [Contributor's Guide](./CONTRIBUTING.md) to
 help avoid any wasted or duplicate effort.
+
+### Developer setup: pre-commit hooks (optional but recommended)
+
+To keep code quality consistent, we provide pre-commit hooks for ruff (lint+format) and mypy; and a pre-push hook that runs tests with coverage.
+
+1. Install dev deps (once): `pip install -r requirements-dev.txt`
+2. Install hooks (once): `pre-commit install --install-hooks`
+3. Optional: enable pre-push test runner: `pre-commit install --hook-type pre-push`
+
+Hooks configured in `.pre-commit-config.yaml`:
+
+- ruff (with autofix) and ruff-format
+- mypy with the router exclusion
+- pre-push: `./scripts/run-tests.sh --cov=src --cov-report=term-missing`
 
 ## Communicating with the Team
 
@@ -189,9 +243,9 @@ Please review these brief docs below about our coding practices.
 This is a work in progress as we learn what we'll need to provide people in
 order to be effective contributors to our project.
 
- - [Coding Style](./doc/STYLE.md)
- - [Code Organization](./doc/ORGANIZATION.md)
- - [Exceptions in our legacy codebase](./doc/EXCEPTIONS.md)
+- [Coding Style](./doc/STYLE.md)
+- [Code Organization](./doc/ORGANIZATION.md)
+- [Exceptions in our legacy codebase](./doc/EXCEPTIONS.md)
 
 ---
 
@@ -199,8 +253,8 @@ order to be effective contributors to our project.
 
 This project has adopted the [Code of Conduct][conduct-code]. For more information see the [Code of Conduct][conduct-code] or contact [info@softwaredevlabs.com][conduct-email] with any additional questions or comments.
 
-[conduct-code](./CODE_OF_CONDUCT.md)
-
-[conduct-email]: mailto:info@softwaredevlabs.com
 [conduct-code]: ./CODE_OF_CONDUCT.md
 [conduct-email]: mailto:info@softwaredevlabs.com
+[docs-repo]: https://github.com/SoftwareDevLabs  
+<!-- TODO: update [docs-repo] once the dedicated docs repository is created,
+     e.g. https://github.com/SoftwareDevLabs/unstructuredDataHandler-docs -->

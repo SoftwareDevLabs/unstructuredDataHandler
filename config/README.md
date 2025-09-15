@@ -1,8 +1,8 @@
-# SDLC_core Configuration
+# unstructuredDataHandler Configuration
 
 ## Contents
 
-This folder contains the various configurations for SDLC_core especially for generative AI related such as models, prompts and logging.
+This folder contains the various configurations for unstructuredDataHandler especially for generative AI related such as models, prompts and logging.
 ```
 📁 config/ → YAML config for models, prompts, logging
     ├── model_config.yaml    # Model-specific configurations

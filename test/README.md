@@ -1,8 +1,8 @@
-# SDLC_core Tests
+# unstructuredDataHandler Tests
 
 ## Contents
 
-This folder contains the various test runners for SDLC_core. Please refer to the documentation within for how to run them:
+This folder contains the various test runners for unstructuredDataHandler. Please refer to the documentation within for how to run them:
 ```
 📁 tests/ → Unit, integration, and end-to-end tests
 ```

@@ -1,10 +1,10 @@
-# Branches in SDLC_core
+# Branches in unstructuredDataHandler
 
-In SDLC_core, `dev/main` is the primary branch for the repo.
+In unstructuredDataHandler, `dev/main` is the primary branch for the repo.
 
 Any branch that begins with `dev/` is recognized by our CI system and will automatically run builds and run our unit and feature tests. For feature branches the pattern we use is `dev/<alias>/<whatever you want here>`. ex. `dev/austdi/SomeCoolUnicodeFeature`. The important parts are the dev prefix and your alias.
 
-`inbox` is a special branch that coordinates SDLC_core code to the Overall Tool Repo.
+`inbox` is a special branch that coordinates unstructuredDataHandler code to the Overall Tool Repo.
 
 # Code Submission Process
 

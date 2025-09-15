@@ -1,7 +1,11 @@
 import os
 import argparse
 from src.agents import deepagent
-from dotenv import load_dotenv
+try:
+    from dotenv import load_dotenv  # type: ignore
+except Exception:
+    def load_dotenv(*_args, **_kwargs):  # type: ignore
+        return False
 
 def main():
     # Load environment variables from .env file in the repo root
@@ -25,7 +29,7 @@ def main():
     elif args.provider.lower() == "openai":
         api_key = os.getenv("OPENAI_API_KEY")
 
-    agent = deepagent.SDLCFlexibleAgent(
+    agent = deepagent.FlexibleAgent(
         provider=args.provider,
         api_key=api_key,
         model=args.model,

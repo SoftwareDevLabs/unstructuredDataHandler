@@ -1,8 +1,8 @@
-# SDLC_core Data
+# unstructuredDataHandler Data
 
 ## Contents
 
-This folder contains the various data files for SDLC_core, including prompts, embeddings, and other dynamic content.
+This folder contains the various data files for unstructuredDataHandler, including prompts, embeddings, and other dynamic content.
 ```
 📁 data/ → Prompts, embeddings, and other dynamic content # Data directory
    ├── cache/             # Cache storage

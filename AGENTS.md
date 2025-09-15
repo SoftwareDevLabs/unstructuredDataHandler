@@ -1,10 +1,10 @@
 # Instructions for AI Agents
 
-This document provides instructions and guidelines for AI agents working with the SDLC_core repository.
+This document provides instructions and guidelines for AI agents working with the unstructuredDataHandler repository.
 
 ## Repository Overview
 
-SDLC_core is a Python-based Software Development Life Cycle core project that provides AI/ML capabilities for software development workflows. The repository contains modules for LLM clients, intelligent agents, memory management, prompt engineering, document retrieval, skill execution, and various utilities.
+unstructuredDataHandler is a Python-based Software Development Life Cycle core project that provides AI/ML capabilities for software development workflows. The repository contains modules for LLM clients, intelligent agents, memory management, prompt engineering, document retrieval, skill execution, and various utilities.
 
 - **Primary Language**: Python 3.10-3.12
 - **Secondary Languages**: TypeScript (for Azure pipelines), Shell scripts
@@ -12,11 +12,22 @@ SDLC_core is a Python-based Software Development Life Cycle core project that pr
 
 ## Environment Setup
 
-### 1. Install Dependencies
+### 1. Preferred: Isolated venv via script
 
-**IMPORTANT**: The project's dependencies are split into multiple files. For development and testing, you should install the dependencies from `requirements-dev.txt`.
+Use the reproducible test script. It creates `.venv_ci` and pins pytest for reliable runs.
 
 ```bash
+./scripts/run-tests.sh
+```
+
+### 2. Alternative: Local dev venv
+
+Create and activate your own virtual environment, then install dev dependencies.
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -U pip
 pip install -r requirements-dev.txt
 ```
 
@@ -38,16 +49,18 @@ PYTHONPATH=. python -m pytest
 
 ### Testing
 
-The test infrastructure is set up. Use the following commands to run tests:
+Preferred (isolated venv):
 
 ```bash
-# Run all tests
+./scripts/run-tests.sh                      # Full test run
+./scripts/run-tests.sh test/unit -k deepagent  # Narrow selection
+```
+
+Alternative (local venv):
+
+```bash
 PYTHONPATH=. python -m pytest test/ -v
-
-# Run tests with coverage
 PYTHONPATH=. python -m pytest test/ --cov=src/ --cov-report=xml
-
-# Run specific test suites
 PYTHONPATH=. python -m pytest test/unit/ -v
 PYTHONPATH=. python -m pytest test/integration/ -v
 PYTHONPATH=. python -m pytest test/e2e/ -v
@@ -83,6 +96,7 @@ The core logic is in the `src/` directory, which is organized into the following
 - `src/utils/`: Logging, caching, rate limiting, tokens
 
 Other important directories:
+
 - `config/`: YAML configurations for models, prompts, logging
 - `data/`: Prompts, embeddings, dynamic content
 - `examples/`: Minimal scripts demonstrating key features
@@ -90,19 +104,19 @@ Other important directories:
 
 ## Key Development Rules
 
-### ALWAYS:
+### ALWAYS
 
-1.  **Install dependencies** before making changes.
-2.  **Set the `PYTHONPATH`** for all commands.
-3.  **Run tests** (`PYTHONPATH=. python -m pytest test/ -v`) to validate the current state before making changes.
-4.  **Configure the agent** by editing `config/model_config.yaml` before running it.
-5.  **Ensure new Python modules** have proper `__init__.py` files.
-6.  **Follow the branch naming convention**: `dev/<alias>/<feature>`.
-7.  **Fill out the PR template** when submitting a pull request. The template is located at `.github/PULL_REQUEST_TEMPLATE.md`.
+1. **Install dependencies** before making changes.
+2. **Set the `PYTHONPATH`** for all commands.
+3. **Run tests** (`PYTHONPATH=. python -m pytest test/ -v`) to validate the current state before making changes.
+4. **Configure the agent** by editing `config/model_config.yaml` before running it.
+5. **Ensure new Python modules** have proper `__init__.py` files.
+6. **Follow the branch naming convention**: `dev/<alias>/<feature>`.
+7. **Fill out the PR template** when submitting a pull request. The template is located at `.github/PULL_REQUEST_TEMPLATE.md`.
 
-### NEVER:
+### NEVER
 
--   Run tests without setting `PYTHONPATH`.
--   Assume `requirements.txt` contains dependencies.
--   Create modules named "router" (conflicts with existing router.py files).
--   Modify Azure pipeline scripts (`build/azure-pipelines/`) without TypeScript knowledge.
+- Run tests without setting `PYTHONPATH`.
+- Assume `requirements.txt` contains dependencies.
+- Create modules named "router" (conflicts with existing router.py files).
+- Modify Azure pipeline scripts (`build/azure-pipelines/`) without TypeScript knowledge.

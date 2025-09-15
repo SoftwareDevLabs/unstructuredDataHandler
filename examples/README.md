@@ -1,8 +1,8 @@
-# SDLC_core Examples
+# unstructuredDataHandler Examples
 
 ## Contents
 
-This folder contains the various examples for SDLC_core.
+This folder contains the various examples for unstructuredDataHandler.
 ```
 📁 examples/ → Minimal scripts to test key features # Example implementations
    ├── basic_completion.py

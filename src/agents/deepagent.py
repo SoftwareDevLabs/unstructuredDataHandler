@@ -45,9 +45,10 @@ class EchoTool(BaseTool):
         return f"Echo: {query}"
 
 
-class SDLCFlexibleAgent:
+class FlexibleAgent:
     """
-    SDLC Agent supporting multiple LLM providers (Gemini, OpenAI, Ollama, etc.).
+    Flexible agent supporting multiple LLM providers (Gemini, OpenAI, Ollama, etc.)
+    for unstructuredDataHandler.
     """
     def __init__(
         self,
@@ -71,8 +72,10 @@ class SDLCFlexibleAgent:
         with open(config_path, 'r', encoding='utf-8') as f:
             config = yaml.safe_load(f)
 
-        provider = provider or config.get('default_provider')
-        provider = provider.lower()
+        # Normalize provider and validate
+        provider = (provider or config.get('default_provider') or "").lower()
+        if not provider:
+            raise ValueError("Provider not specified and no default_provider found in config.")
 
         self.dry_run = bool(dry_run)
         self.llm: Any = None
@@ -165,6 +168,12 @@ class MockAgent:
 
 def main():
     """Main function to run the agent from the command line."""
+    # Optional dependency: python-dotenv (present in requirements-dev)
+    try:
+        from dotenv import load_dotenv  # type: ignore
+    except Exception:  # pragma: no cover - fallback if dotenv is unavailable
+        def load_dotenv(*_args, **_kwargs):  # type: ignore
+            return False
     parser = argparse.ArgumentParser()
     parser.add_argument("--dry-run", action="store_true", help="Run agent in dry-run mode")
     parser.add_argument("--provider", help="LLM provider to use")
@@ -184,7 +193,7 @@ def main():
             api_key = os.getenv("OPENAI_API_KEY")
 
     try:
-        agent = SDLCFlexibleAgent(
+        agent = FlexibleAgent(
             provider=args.provider,
             api_key=api_key,
             model=args.model,
@@ -196,7 +205,9 @@ def main():
         print(f"Error: {e}")
 
 import argparse
-from dotenv import load_dotenv
 
 if __name__ == "__main__":
     main()
+
+# Backward compatibility: old class name preserved
+SDLCFlexibleAgent = FlexibleAgent

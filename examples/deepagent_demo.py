@@ -1,8 +1,8 @@
 """
-Example script demonstrating the SDLCFlexibleAgent.
+Example script demonstrating the FlexibleAgent.
 
 This script shows how to:
-- Initialize the SDLCFlexibleAgent.
+- Initialize the FlexibleAgent.
 - Run the agent with a simple prompt.
 - Run the agent with a session ID to demonstrate conversational memory.
 """
@@ -14,12 +14,16 @@ from pathlib import Path
 # Add src to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from agents.deepagent import SDLCFlexibleAgent
-from dotenv import load_dotenv
+from agents.deepagent import FlexibleAgent
+try:
+    from dotenv import load_dotenv  # type: ignore
+except Exception:
+    def load_dotenv(*_args, **_kwargs):  # type: ignore
+        return False
 
 def main():
     """Main demonstration function."""
-    print("🤖 SDLCFlexibleAgent Demo")
+    print("🤖 FlexibleAgent Demo")
     print("=" * 50)
 
     # Load environment variables from .env file
@@ -29,7 +33,7 @@ def main():
     print("\n--- Basic Usage ---")
     try:
         # Initialize the agent (provider and model are loaded from config/model_config.yaml)
-        agent = SDLCFlexibleAgent()
+        agent = FlexibleAgent()
 
         prompt = "What is the capital of France?"
         print(f"Running prompt: '{prompt}'")
@@ -45,7 +49,7 @@ def main():
     print("\n--- Conversational Memory with Session ID ---")
     try:
         # Initialize the agent again for a new conversation
-        agent = SDLCFlexibleAgent()
+        agent = FlexibleAgent()
         session_id = "my-test-session"
 
         # First turn

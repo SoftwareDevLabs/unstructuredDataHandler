@@ -284,8 +284,13 @@ class MermaidParser(BaseParser):
             
             # Message patterns: A->>B: message
             message_patterns = [
+                # Async call
                 (r'(\w+)\s*->>\s*(\w+)\s*:\s*(.+)', 'async_message'),
+                # Sync call
                 (r'(\w+)\s*->\s*(\w+)\s*:\s*(.+)', 'sync_message'),
+                # Return message (Mermaid often uses -->>)
+                (r'(\w+)\s*-->>\s*(\w+)\s*:\s*(.+)', 'return_message'),
+                # Fallback return arrow
                 (r'(\w+)\s*-->\s*(\w+)\s*:\s*(.+)', 'return_message'),
             ]
             

@@ -63,14 +63,14 @@ If you don't have any additional info/context to add but would like to indicate 
 
 If you're able & willing to help fix issues and/or implement features, we'd love your contribution!
 
-The list of ["good first issue"](https://github.com/SoftwareDevLabs/SDLC_core/issues?q=is%3Aopen+is%3Aissue+label%3A%22Help+Wanted%22++label%3A%22good+first+issue%22+)s is another set of issues that might be easier for first-time contributors. Once you're feeling more comfortable in the codebase, feel free to just use the ["Help Wanted"](https://github.com/SoftwareDevLabs/SDLC_core/issues?q=is%3Aopen+is%3Aissue+label%3A%22Help+Wanted%22+) label, or just find any issue you're interested in and hop in!
+The list of ["good first issue"](https://github.com/SoftwareDevLabs/unstructuredDataHandler/issues?q=is%3Aopen+is%3Aissue+label%3A%22Help+Wanted%22++label%3A%22good+first+issue%22+)s is another set of issues that might be easier for first-time contributors. Once you're feeling more comfortable in the codebase, feel free to just use the ["Help Wanted"](https://github.com/SoftwareDevLabs/unstructuredDataHandler/issues?q=is%3Aopen+is%3Aissue+label%3A%22Help+Wanted%22+) label, or just find any issue you're interested in and hop in!
 
 Generally, we categorize issues in the following way:
-* ["Bugs"](https://github.com/SoftwareDevLabs/SDLC_core/issues?q=is%3Aopen+is%3Aissue+label%3A%22Issue-Bug%22+) are parts of the SDLC_core that are not quite working the right way. There's code to already support some scenario, but it's not quite working right. Fixing these is generally a matter of debugging the broken functionality and fixing the wrong code.
-* ["Tasks"](https://github.com/SoftwareDevLabs/SDLC_core/issues?q=is%3Aopen+is%3Aissue+label%3A%22Issue-Task%22+) are usually new pieces of functionality that aren't yet implemented for the SDLC_core. These are usually smaller features, which we believe
+* ["Bugs"](https://github.com/SoftwareDevLabs/unstructuredDataHandler/issues?q=is%3Aopen+is%3Aissue+label%3A%22Issue-Bug%22+) are parts of the unstructuredDataHandler that are not quite working the right way. There's code to already support some scenario, but it's not quite working right. Fixing these is generally a matter of debugging the broken functionality and fixing the wrong code.
+* ["Tasks"](https://github.com/SoftwareDevLabs/unstructuredDataHandler/issues?q=is%3Aopen+is%3Aissue+label%3A%22Issue-Task%22+) are usually new pieces of functionality that aren't yet implemented for the unstructuredDataHandler. These are usually smaller features, which we believe
   - could be a single, atomic PR
   - Don't require much design consideration, or we've already written the spec for the larger feature they belong to.
-* ["Features"](https://github.com/SoftwareDevLabs/SDLC_core/issues?q=is%3Aopen+is%3Aissue+label%3A%22Issue-Feature%22+) are larger pieces of new functionality. These are usually things we believe would require larger discussion of how they should be implemented, or they'll require some complicated new settings. They might just be features that are composed of many individual tasks. Often times, with features, we like to have a spec written before development work is started, to make sure we're all on the same page (see below).
+* ["Features"](https://github.com/SoftwareDevLabs/unstructuredDataHandler/issues?q=is%3Aopen+is%3Aissue+label%3A%22Issue-Feature%22+) are larger pieces of new functionality. These are usually things we believe would require larger discussion of how they should be implemented, or they'll require some complicated new settings. They might just be features that are composed of many individual tasks. Often times, with features, we like to have a spec written before development work is started, to make sure we're all on the same page (see below).
 
 Bugs and tasks are obviously the easiest to get started with, but don't feel afraid of features either! We've had some community members contribute some amazing "feature"-level work to our repos (albeit, with lots of discussion 😄).
 
@@ -101,7 +101,7 @@ Team members will be happy to help review specs and guide them to completion.
 
 ### Help Wanted
 
-Once the team has approved an issue/spec, development can proceed. If no developers are immediately available, the spec can be parked ready for a developer to get started. Parked specs' issues will be labeled "Help Wanted". To find a list of development opportunities waiting for developer involvement, visit the Issues and filter on [the Help-Wanted label](https://github.com/SoftwareDevLabs/SDLC_core/labels/Help%20Wanted).
+Once the team has approved an issue/spec, development can proceed. If no developers are immediately available, the spec can be parked ready for a developer to get started. Parked specs' issues will be labeled "Help Wanted". To find a list of development opportunities waiting for developer involvement, visit the Issues and filter on [the Help-Wanted label](https://github.com/SoftwareDevLabs/unstructuredDataHandler/labels/Help%20Wanted).
 
 ---
 
@@ -130,7 +130,7 @@ Here are a few things you can do that will increase the likelihood of your pull 
 
 ### Testing
 
-Testing is a key component in the development workflow. This SDLC_core should use well defined testing methodology to ensure that SDLC_core and its key components are tested.
+Testing is a key component in the development workflow. This unstructuredDataHandler should use well defined testing methodology to ensure that unstructuredDataHandler and its key components are tested.
 
 <!---TAEF (the Test Authoring and Execution Framework) as the main framework for testing.
 

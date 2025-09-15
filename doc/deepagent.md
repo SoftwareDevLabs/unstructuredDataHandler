@@ -4,7 +4,7 @@ This document describes the usage of `src/agents/deepagent.py`, its configuratio
 
 ## Configuration
 
-The `SDLCFlexibleAgent` is configured via the `config/model_config.yaml` file. This file allows you to set the default LLM provider, model, and agent settings.
+The `FlexibleAgent` (formerly `SDLCFlexibleAgent`) is configured via the `config/model_config.yaml` file. This file allows you to set the default LLM provider, model, and agent settings.
 
 Here is an example of the configuration file:
 ```yaml
@@ -94,3 +94,7 @@ python src/agents/deepagent.py --provider ollama --model llama2 --prompt "Why is
 -   If you want to run the provider matrix in CI, which exercises the real provider adapters, you can manually trigger the `Python Tests (consolidated)` workflow from the GitHub Actions tab and set the `run_providers` input to `true`.
 -   For provider matrix runs, you must provide API keys as GitHub Secrets. For private repos or to upload code coverage, you can also set the `CODECOV_TOKEN` secret.
 -   Run the providers matrix manually from the Actions tab: select `Python Tests (consolidated)` → `Run workflow` → set `run_providers` to `true`.
+
+### Deprecation note
+
+`SDLCFlexibleAgent` has been renamed to `FlexibleAgent`. The old name remains as an alias for backward compatibility but may be removed in a future release. Please update imports to use `FlexibleAgent`.

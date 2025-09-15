@@ -1,8 +1,8 @@
-# SDLC_core Notebooks
+# unstructuredDataHandler Notebooks
 
 ## Contents
 
-This folder contains the various notebooks for SDLC_core that used for quick experiments and prototyping.
+This folder contains the various notebooks for unstructuredDataHandler that used for quick experiments and prototyping.
 
 ```
 
