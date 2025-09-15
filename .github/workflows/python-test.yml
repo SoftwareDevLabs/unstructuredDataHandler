@@ -92,7 +92,7 @@ jobs:
         env:
           PYTHONPATH: .
         run: |
-          python -c "from src.agents import deepagent; a=deepagent.SDLCFlexibleAgent(provider='gemini', model='chat-bison-001', dry_run=True); print('constructed', getattr(a, 'llm', None))"
+          python -c "from src.agents import deepagent; a=deepagent.FlexibleAgent(provider='gemini', model='chat-bison-001', dry_run=True); print('constructed', getattr(a, 'llm', None))"
 
   providers:
     name: Providers matrix (optional)
@@ -114,4 +114,4 @@ jobs:
         env:
           PYTHONPATH: .
         run: |
-          python -c "from src.agents import deepagent; p='${{ matrix.provider }}'; d = deepagent.SDLCFlexibleAgent(provider=p, dry_run=True); print('provider', p, 'dry_run', getattr(d, 'dry_run', False))"
+          python -c "from src.agents import deepagent; p='${{ matrix.provider }}'; d = deepagent.FlexibleAgent(provider=p, dry_run=True); print('provider', p, 'dry_run', getattr(d, 'dry_run', False))"
